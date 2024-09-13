@@ -106,3 +106,8 @@ public class PersonFilter: IFilter
 
 
 }
+
+public class Person
+{
+
+}

@@ -1,5 +1,5 @@
 ﻿using Donut.QueryBuilding.Enum;
-using Donut.SharedKernel.Filters.Utils;
+using Donut.QueryBuilding.Utils;
 using Microsoft.Data.SqlClient;
 using System.Text;
 
@@ -81,7 +81,7 @@ public class SQLQueryBuilder
                 case Operator.Equals:
                     whereClause.AppendFormat("[{0}] = {1}", criterion.Column, parameterName);
                     break;
-                case Operator.NotEqual:
+                case Operator.NotEquals:
                     whereClause.AppendFormat("[{0}] <> {1}", criterion.Column, parameterName);
                     break;
                 case Operator.LessThan:
@@ -107,3 +107,4 @@ public class SQLQueryBuilder
             }
         }
     }
+}

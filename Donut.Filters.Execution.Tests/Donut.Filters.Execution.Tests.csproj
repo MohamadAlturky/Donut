@@ -10,6 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Donut.Core\Donut.Core.csproj" />
     <ProjectReference Include="..\Donut.Filters.Execution\Donut.Filters.Execution.csproj" />
+    <ProjectReference Include="..\Donut.Filters\Donut.Filters.csproj" />
+    <ProjectReference Include="..\Donut.QueryBuilding\Donut.QueryBuilding.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Donut.SharedKernel.Filters.Utils;
+﻿namespace Donut.QueryBuilding.Utils;
 
 public class Select
 {

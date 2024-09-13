@@ -33,4 +33,33 @@ public class FilterPropertiesGrouper
         // Return the three lists in a Tuple
         return Tuple.Create(selectProperties, orderByProperties, otherProperties);
     }
+
+    public static Dictionary<string, List<PropertyInfo>> GroupPropertiesBySuffix(List<PropertyInfo> properties)
+    {
+        string[] prefixes = { "EndsWith", "StartsWith", "Contains", "BiggerThan", "BiggerThanOrEqual", "LessThan", "LessThanOrEqual", "NotEquals", "Equals" };
+
+        var groupedProperties = new Dictionary<string, List<PropertyInfo>>();
+
+        foreach (var prefix in prefixes)
+        {
+            groupedProperties[prefix] = new List<PropertyInfo>();
+        }
+
+        foreach (var property in properties)
+        {
+
+            foreach (var prefix in prefixes)
+            {
+                if (property.Name.EndsWith(prefix))
+                {
+                    groupedProperties[prefix].Add(property);
+                }
+            }
+
+        }
+
+        return groupedProperties;
+    }
+
+
 }
