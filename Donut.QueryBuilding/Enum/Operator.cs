@@ -13,5 +13,5 @@ public enum Operator
     Like,
     StartsWith,
     Contains,
-    NotEquals
+    NotEqual
 }

@@ -5,6 +5,6 @@ namespace Donut.Core.Filter
     public interface IFilter
     {
         PaginatedRequest PaginatedRequest { get; set; }
-        bool SelectAll { get; set; }
+        bool EagerLoading { get; set; }
     }
 }

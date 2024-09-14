@@ -9,6 +9,9 @@ public class FilterExecutionGenerator
     public static string GenerateFilter(Type inputType)
     {
         StringBuilder classBuilder = new StringBuilder();
+        StringBuilder selectBuilder = new StringBuilder();
+        StringBuilder whereBuilder = new StringBuilder();
+        StringBuilder orderByBuilder = new StringBuilder();
         string className = inputType.Name + "Executor";
         string entityName = RemoveFilterSuffix(inputType.Name);
         string namespaceName = "Donut.Filters.Execution";
@@ -17,7 +20,8 @@ public class FilterExecutionGenerator
         classBuilder.AppendLine($"using Donut.QueryBuilding.Enum;");
         classBuilder.AppendLine($"using Donut.QueryBuilding.Utils;");
         classBuilder.AppendLine($"using Donut.QueryBuilding.Builder;");
-        classBuilder.AppendLine($"using Donut.QueryBuilding.Execution;");
+        classBuilder.AppendLine($"using Donut.QueryBuilding.Execution;\nusing Microsoft.Data.SqlClient;");
+        classBuilder.AppendLine($"using System.Text;");
         classBuilder.AppendLine($"using Donut.Core.Pagination;\n");
         classBuilder.AppendLine($"namespace {namespaceName};");
         classBuilder.AppendLine($"public class {className}: IFilterExecutor<{entityName},{inputType.Name}>");
@@ -34,9 +38,8 @@ public class FilterExecutionGenerator
         classBuilder.AppendLine($"    // For Every Filter");
         classBuilder.AppendLine($"    public PaginatedResponse<{entityName}> Execute({inputType.Name} filter)");
         classBuilder.AppendLine($"    {{\n");
-        classBuilder.AppendLine($"        var selectList = new List<Select>();");
-        classBuilder.AppendLine($"        var whereList = new List<Where<object>>();");
-        classBuilder.AppendLine($"        var orderByList = new List<OrderBy>();");
+        classBuilder.AppendLine($"        var queryBuilder = new StringBuilder();");
+        classBuilder.AppendLine($"        var parameters = new List<SqlParameter>();");
 
         var groupedProperties = FilterPropertiesGrouper.GroupPropertiesByName(inputType);
 
@@ -49,11 +52,15 @@ public class FilterExecutionGenerator
         {
             classBuilder.AppendLine($"        if (filter.{select.Name})");
             classBuilder.AppendLine($"        {{");
-            classBuilder.AppendLine($"             selectList.Add(new Select()" +
-                $" {{" +
-                $" Column = \"{select.Name}\"" +
-                $" }});");
+            //classBuilder.AppendLine($"             selectList.Add(new Select()" +
+            //    $" {{" +
+            //    $" Column = \"{RemovePrefix(select.Name,"Select")}\"" +
+            //    $" }});");
+            classBuilder.AppendLine($"             queryBuilder.Append({RemovePrefix(select.Name, "Select")});");
+
             classBuilder.AppendLine($"        }}");
+
+            selectBuilder.AppendLine($"    private static readonly string {RemovePrefix(select.Name, "Select")} = \"{RemovePrefix(select.Name, "Select")}\";");
 
         }
         foreach (var orderby in orderByProperties)
@@ -61,51 +68,116 @@ public class FilterExecutionGenerator
             var (propertyName, direction) = ParseOrderByString(orderby.Name);
             classBuilder.AppendLine($"        if (filter.{orderby.Name})");
             classBuilder.AppendLine($"        {{");
-            classBuilder.AppendLine($"             orderByList.Add(new OrderBy()" +
-                $" {{" +
-                $" Column = \"{propertyName}\",Direction=OrderDirection.{direction}" +
-                $" }});");
+            //classBuilder.AppendLine($"             orderByList.Add(new OrderBy()" +
+            //    $" {{" +
+            //    $" Column = \"{propertyName}\",Direction=OrderDirection.{direction}" +
+            //    $" }});");
+            classBuilder.AppendLine($"             queryBuilder.Append(OrderBy{propertyName}{direction});");
             classBuilder.AppendLine($"        }}");
-
+            orderByBuilder.AppendLine($"    private static readonly string OrderBy{propertyName}{direction} = \"[{propertyName}] {RepresentDirection(direction)}\";");
 
         }
         PropertyInfo[] properties = inputType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         var dict = FilterPropertiesGrouper.GroupPropertiesBySuffix(otherProperties);
+        var parameterIndex = 1;
+
         foreach (var prefix in dict.Keys)
         {
+
             Console.WriteLine($"{prefix} Properties:");
             dict[prefix].ForEach(p =>
             {
+                string parameterName = $"@p{parameterIndex++}";
                 classBuilder.AppendLine($"        if (filter.{p.Name} is not null)");
                 classBuilder.AppendLine($"        {{");
-                classBuilder.AppendLine($"             whereList.Add(new Where<object>()" +
-                    $" {{" +
-                    $" Column = \"{RemoveSuffix(p.Name, prefix)}\",Value=filter.{p.Name},Action=Operator.{prefix}" +
-                    $" }});");
+                //classBuilder.AppendLine($"             whereList.Add(new Where<object>()" +
+                //    $" {{" +
+                //    $" Column = \"{RemoveSuffix(p.Name, prefix)}\",Value=filter.{p.Name},Action=Operator.{prefix}" +
+                //    $" }});");
+                whereBuilder.AppendLine($"    private static readonly string {p.Name} = \"{Represent(RemoveSuffix(p.Name, prefix),parameterName,prefix)}\";");
+                classBuilder.AppendLine($"             queryBuilder.Append({p.Name});");
+                classBuilder.AppendLine($"             parameters.Add(new SqlParameter(\"{parameterName}\", filter.{p.Name}));");
                 classBuilder.AppendLine($"        }}");
+
+
             });
             Console.WriteLine();
         }
         var lists = $"""
                 
-                // Query Building 
-                var orderByClause = SQLQueryBuilder.BuildOrderByClause(orderByList);
-                var (whereClause,parameters) = SQLQueryBuilder.BuildWhereClause(whereList);
-                var selectClause = SQLQueryBuilder.BuildSelectClause(selectList);
-
+               
                 // Query Execution
-                return _executor.ExecuteQuery<{entityName}>(selectClause, "{entityName}", whereClause, parameters, orderByClause, filter.PaginatedRequest);
+                return new();
+                //_executor.ExecuteQuery<{entityName}>(selectClause, "{entityName}", whereClause, parameters, orderByClause, filter.PaginatedRequest);
         """;
 
         classBuilder.AppendLine(lists);
         classBuilder.AppendLine($"    }}\n");
 
-        
+        classBuilder.AppendLine(selectBuilder.ToString());
+        classBuilder.AppendLine(orderByBuilder.ToString()+"\n");
+        classBuilder.AppendLine(whereBuilder.ToString());
+
         classBuilder.AppendLine("}");
 
         return classBuilder.ToString();
     }
+
+    public static string Represent(string column, string parameterName, string action)
+    {
+        string whereClause;
+        switch (action)
+        {
+            case "Equals":
+                whereClause = $"[{column}] = {parameterName}";
+                break;
+            case "NotEqual":
+                whereClause = $"[{column}] <> {parameterName}";
+                break;
+            case "LessThanNumber":
+                whereClause = $"[{column}] < {parameterName}";
+                break;
+            case "LessThanOrEqualNumber":
+                whereClause = $"[{column}] <= {parameterName}";
+                break;
+            case "BiggerThanNumber":
+                whereClause = $"[{column}] > {parameterName}";
+                break;
+            case "BiggerThanOrEqualNumber":
+                whereClause = $"[{column}] >= {parameterName}";
+                break;
+            case "Contains":
+                whereClause = $"[{column}] LIKE '%' + {parameterName} + '%'";
+                break;
+            case "StartsWith":
+                whereClause = $"[{column}] LIKE {parameterName} + '%'";
+                break;
+            case "EndsWith":
+                whereClause = $"[{column}] LIKE '%' + {parameterName}";
+                break;
+            case "BiggerThanOrEqualDate":
+                whereClause = $"[{column}] >= CAST({parameterName} AS DATE)";
+                break;
+            case "BiggerThanDate":
+                whereClause = $"[{column}] > CAST({parameterName} AS DATE)";
+                break;
+            case "LessThanOrEqualDate":
+                whereClause = $"[{column}] <= CAST({parameterName} AS DATE)";
+                break;
+            case "LessThanDate":
+                whereClause = $"[{column}] < CAST({parameterName} AS DATE)";
+                break;
+            default:
+                whereClause = $"{column}, {action}, {parameterName}";
+                break;
+        }
+
+        return whereClause;
+    }
+
+
+
     private static string RemoveFilterSuffix(string input)
     {
         const string suffix = "Filter";
@@ -122,6 +194,21 @@ public class FilterExecutionGenerator
 
         return input;
     }
+    private static string RemovePrefix(string input, string prefix)
+    {
+        if (string.IsNullOrEmpty(input) || string.IsNullOrEmpty(prefix))
+        {
+            return input;
+        }
+
+        if (input.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+        {
+            return input.Substring(prefix.Length);
+        }
+
+        return input;
+    }
+
     private static string RemoveSuffix(string input,string suffix)
     {
 
@@ -177,5 +264,16 @@ public class FilterExecutionGenerator
         }
 
         return (propertyName,direction);
+    }
+    public static string RepresentDirection(string direction)
+    {
+        if(direction == "Ascending")
+        {
+            return "ASC";
+        }
+        else
+        {
+            return "DESC";
+        }
     }
 }

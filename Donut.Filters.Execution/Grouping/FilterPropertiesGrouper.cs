@@ -36,7 +36,24 @@ public class FilterPropertiesGrouper
 
     public static Dictionary<string, List<PropertyInfo>> GroupPropertiesBySuffix(List<PropertyInfo> properties)
     {
-        string[] prefixes = { "EndsWith", "StartsWith", "Contains", "BiggerThan", "BiggerThanOrEqual", "LessThan", "LessThanOrEqual", "NotEquals", "Equals" };
+        string[] prefixes = [
+            "BiggerThanOrEqualDate",
+            "BiggerThanDate",
+            "LessThanOrEqualDate",
+            "LessThanDate",
+
+            "BiggerThanOrEqualNumber",
+            "BiggerThanNumber",
+            "LessThanOrEqualNumber",
+            "LessThanNumber",
+
+            "Contains",
+            "StartsWith",
+            "EndsWith",
+
+            "Equals",
+            "NotEqual",
+        ];
 
         var groupedProperties = new Dictionary<string, List<PropertyInfo>>();
 

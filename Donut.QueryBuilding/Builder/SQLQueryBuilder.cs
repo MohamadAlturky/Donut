@@ -81,7 +81,7 @@ public class SQLQueryBuilder
                 case Operator.Equals:
                     whereClause.AppendFormat("[{0}] = {1}", criterion.Column, parameterName);
                     break;
-                case Operator.NotEquals:
+                case Operator.NotEqual:
                     whereClause.AppendFormat("[{0}] <> {1}", criterion.Column, parameterName);
                     break;
                 case Operator.LessThan:

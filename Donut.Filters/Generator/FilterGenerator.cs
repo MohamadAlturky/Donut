@@ -19,7 +19,7 @@ public class FilterGenerator
         classBuilder.AppendLine("{");
         classBuilder.AppendLine($"    // For Every Filter");
         classBuilder.AppendLine($"    public PaginatedRequest PaginatedRequest {{ get; set; }}");
-        classBuilder.AppendLine($"    public bool SelectAll {{ get; set; }}\n");
+        classBuilder.AppendLine($"    public bool EagerLoading {{ get; set; }} = true;\n");
 
         PropertyInfo[] properties = inputType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
@@ -39,7 +39,7 @@ public class FilterGenerator
         string typeName = nonNullTypeName+"?";
         classBuilder.AppendLine($"    // {property.Name}");
         classBuilder.AppendLine($"    public {typeName} {property.Name}Equals {{ get; set; }}");
-        classBuilder.AppendLine($"    public {typeName} {property.Name}NotEquals {{ get; set; }}");
+        classBuilder.AppendLine($"    public {typeName} {property.Name}NotEqual {{ get; set; }}");
         classBuilder.AppendLine($"    public bool Select{property.Name} {{ get; set; }}");
         classBuilder.AppendLine($"    public bool OrderBy{property.Name}Ascending {{ get; set; }}");
         classBuilder.AppendLine($"    public bool OrderBy{property.Name}Descending {{ get; set; }}");
@@ -51,13 +51,17 @@ public class FilterGenerator
         }
         if (nonNullTypeName=="int"||nonNullTypeName=="decimal"||nonNullTypeName=="double"||nonNullTypeName=="long")
         {
-            classBuilder.AppendLine($"    public {typeName} {property.Name}LessThan {{ get; set; }}");
-            classBuilder.AppendLine($"    public {typeName} {property.Name}BiggerThan{{ get; set; }}");
+            classBuilder.AppendLine($"    public {typeName} {property.Name}LessThanNumber {{ get; set; }}");
+            classBuilder.AppendLine($"    public {typeName} {property.Name}BiggerThanNumber {{ get; set; }}");
+            classBuilder.AppendLine($"    public {typeName} {property.Name}LessThanOrEqualNumber {{ get; set; }}");
+            classBuilder.AppendLine($"    public {typeName} {property.Name}BiggerThanOrEqualNumber {{ get; set; }}");
         }
         if (nonNullTypeName=="DateTime"||nonNullTypeName=="DateOnly")
         {
-            classBuilder.AppendLine($"    public {typeName} {property.Name}LessThan {{ get; set; }}");
-            classBuilder.AppendLine($"    public {typeName} {property.Name}BiggerThan{{ get; set; }}");
+            classBuilder.AppendLine($"    public {typeName} {property.Name}LessThanDate {{ get; set; }}");
+            classBuilder.AppendLine($"    public {typeName} {property.Name}BiggerThanDate {{ get; set; }}");
+            classBuilder.AppendLine($"    public {typeName} {property.Name}LessThanOrEqualDate {{ get; set; }}");
+            classBuilder.AppendLine($"    public {typeName} {property.Name}BiggerThanOrEqualDate {{ get; set; }}");
         }
         classBuilder.AppendLine($"\n");
     }
