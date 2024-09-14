@@ -24,20 +24,31 @@
 
 //    }
 //}
-using Donut.Filters;
-using Donut.Filters.Files;
-using Donut.Filters.Generator;
+//using Donut.Filters;
+//using Donut.Filters.Files;
+//using Donut.Filters.Generator;
 
 
 
 
-var content = FilterExecutionGenerator.GenerateFilter(typeof(PersonFilter));
-Console.WriteLine(content);
-FileWriter fileWriter = new();
-string projectDirectory = "C:\\New folder\\Donut\\Donut.Filters.Execution.Tests";
-Console.WriteLine(projectDirectory);
-fileWriter.CreateFolder($"{projectDirectory}/Generated");
-fileWriter.CreateFile($"{projectDirectory}/Generated/PersonFilterExecutor.cs");
-fileWriter.WriteToFile(content, $"{projectDirectory}/Generated/PersonFilterExecutor.cs");
+//var content = FilterExecutionGenerator.GenerateFilter(typeof(PersonFilter));
+//FileWriter fileWriter = new();
+//string projectDirectory = "C:\\New folder\\Donut\\Donut.Filters.Execution.Tests";
+//Console.WriteLine(projectDirectory);
+//fileWriter.CreateFolder($"{projectDirectory}/Generated");
+//fileWriter.CreateFile($"{projectDirectory}/Generated/PersonFilterExecutor.cs");
+//fileWriter.WriteToFile(content, $"{projectDirectory}/Generated/PersonFilterExecutor.cs");
 
 
+
+using Donut.Filters.Execution;
+using Donut.QueryBuilding.Execution;
+PersonFilterExecutor s = new PersonFilterExecutor(new QueryExecutor());
+
+s.Execute(new Donut.Filters.PersonFilter()
+{
+    Agde1Equals = 's',
+    Agsse1Equals = 's',
+    OrderByAgde1Descending = true,
+    OrderByAgde1Ascending = true,
+});

@@ -17,3 +17,4 @@ foreach (var type in types)
     fileWriter.CreateFile($"{projectDirectory}/Generated/{type.Name}Filter.cs");
     fileWriter.WriteToFile(content, $"{projectDirectory}/Generated/{type.Name}Filter.cs");
 }
+

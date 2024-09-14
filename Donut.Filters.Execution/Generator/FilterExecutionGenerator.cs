@@ -19,8 +19,9 @@ public class FilterExecutionGenerator
         classBuilder.AppendLine($"using Donut.Core.Filter;");
         classBuilder.AppendLine($"using Donut.QueryBuilding.Enum;");
         classBuilder.AppendLine($"using Donut.QueryBuilding.Utils;");
+        classBuilder.AppendLine($"using Donut.QueryBuilding.Execution;");
         classBuilder.AppendLine($"using Donut.QueryBuilding.Builder;");
-        classBuilder.AppendLine($"using Donut.QueryBuilding.Execution;\nusing Microsoft.Data.SqlClient;");
+        classBuilder.AppendLine($"using Microsoft.Data.SqlClient;");
         classBuilder.AppendLine($"using System.Text;");
         classBuilder.AppendLine($"using Donut.Core.Pagination;\n");
         classBuilder.AppendLine($"namespace {namespaceName};");
@@ -38,7 +39,9 @@ public class FilterExecutionGenerator
         classBuilder.AppendLine($"    // For Every Filter");
         classBuilder.AppendLine($"    public PaginatedResponse<{entityName}> Execute({inputType.Name} filter)");
         classBuilder.AppendLine($"    {{\n");
-        classBuilder.AppendLine($"        var queryBuilder = new StringBuilder();");
+        classBuilder.AppendLine($"        var whereQueryBuilder = new StringBuilder();");
+        classBuilder.AppendLine($"        var selectQueryBuilder = new StringBuilder();");
+        classBuilder.AppendLine($"        var orderByQueryBuilder = new StringBuilder();");
         classBuilder.AppendLine($"        var parameters = new List<SqlParameter>();");
 
         var groupedProperties = FilterPropertiesGrouper.GroupPropertiesByName(inputType);
@@ -47,22 +50,38 @@ public class FilterExecutionGenerator
         var orderByProperties = groupedProperties.Item2;
         var otherProperties = groupedProperties.Item3;
 
+        classBuilder.AppendLine($"");
+        classBuilder.AppendLine($"        bool isFirstSelect = true;");
+        classBuilder.AppendLine($"        if (filter.EagerLoading)");
+        classBuilder.AppendLine($"        {{");
+        classBuilder.AppendLine($"            selectQueryBuilder.Append(\"*\");");
+        classBuilder.AppendLine($"        }}");
+        classBuilder.AppendLine($"        else");
+        classBuilder.AppendLine($"        {{");
 
-        foreach(var select in selectProperties)
+        foreach (var select in selectProperties)
         {
-            classBuilder.AppendLine($"        if (filter.{select.Name})");
-            classBuilder.AppendLine($"        {{");
-            //classBuilder.AppendLine($"             selectList.Add(new Select()" +
-            //    $" {{" +
-            //    $" Column = \"{RemovePrefix(select.Name,"Select")}\"" +
-            //    $" }});");
-            classBuilder.AppendLine($"             queryBuilder.Append({RemovePrefix(select.Name, "Select")});");
+            classBuilder.AppendLine($"            if (filter.{select.Name})");
+            classBuilder.AppendLine($"            {{");
+            classBuilder.AppendLine($"                if (isFirstSelect)");
+            classBuilder.AppendLine($"                {{");
+            classBuilder.AppendLine($"                     selectQueryBuilder.Append({RemovePrefix(select.Name, "Select")});");
+            classBuilder.AppendLine($"                }}");
+            classBuilder.AppendLine($"                else");
+            classBuilder.AppendLine($"                {{");
+            classBuilder.AppendLine($"                     selectQueryBuilder.Append(\", \"+{RemovePrefix(select.Name, "Select")});");
+            classBuilder.AppendLine($"                     isFirstSelect = false;");
+            classBuilder.AppendLine($"                }}");
+            classBuilder.AppendLine($"            }}");
 
-            classBuilder.AppendLine($"        }}");
-
-            selectBuilder.AppendLine($"    private static readonly string {RemovePrefix(select.Name, "Select")} = \"{RemovePrefix(select.Name, "Select")}\";");
+            selectBuilder.AppendLine($"    private static readonly string {RemovePrefix(select.Name, "Select")} = \"[{RemovePrefix(select.Name, "Select")}]\";");
 
         }
+        classBuilder.AppendLine($"        }}");
+
+        classBuilder.AppendLine($"");
+        classBuilder.AppendLine($"        bool isFirstOrderBy = true;");
+
         foreach (var orderby in orderByProperties)
         {
             var (propertyName, direction) = ParseOrderByString(orderby.Name);
@@ -72,7 +91,15 @@ public class FilterExecutionGenerator
             //    $" {{" +
             //    $" Column = \"{propertyName}\",Direction=OrderDirection.{direction}" +
             //    $" }});");
-            classBuilder.AppendLine($"             queryBuilder.Append(OrderBy{propertyName}{direction});");
+            classBuilder.AppendLine($"            if (isFirstOrderBy)");
+            classBuilder.AppendLine($"            {{");
+            classBuilder.AppendLine($"                 orderByQueryBuilder.Append(OrderBy{propertyName}{direction});");
+            classBuilder.AppendLine($"                 isFirstOrderBy = false;");
+            classBuilder.AppendLine($"            }}");
+            classBuilder.AppendLine($"            else");
+            classBuilder.AppendLine($"            {{");
+            classBuilder.AppendLine($"                 orderByQueryBuilder.Append(\", \"+OrderBy{propertyName}{direction});");
+            classBuilder.AppendLine($"            }}");
             classBuilder.AppendLine($"        }}");
             orderByBuilder.AppendLine($"    private static readonly string OrderBy{propertyName}{direction} = \"[{propertyName}] {RepresentDirection(direction)}\";");
 
@@ -81,11 +108,14 @@ public class FilterExecutionGenerator
 
         var dict = FilterPropertiesGrouper.GroupPropertiesBySuffix(otherProperties);
         var parameterIndex = 1;
+        classBuilder.AppendLine($"");
 
+        classBuilder.AppendLine($"        bool isFirstWhere = true;");
         foreach (var prefix in dict.Keys)
         {
 
             Console.WriteLine($"{prefix} Properties:");
+
             dict[prefix].ForEach(p =>
             {
                 string parameterName = $"@p{parameterIndex++}";
@@ -96,7 +126,17 @@ public class FilterExecutionGenerator
                 //    $" Column = \"{RemoveSuffix(p.Name, prefix)}\",Value=filter.{p.Name},Action=Operator.{prefix}" +
                 //    $" }});");
                 whereBuilder.AppendLine($"    private static readonly string {p.Name} = \"{Represent(RemoveSuffix(p.Name, prefix),parameterName,prefix)}\";");
-                classBuilder.AppendLine($"             queryBuilder.Append({p.Name});");
+                classBuilder.AppendLine($"             if(isFirstWhere)");
+                classBuilder.AppendLine($"             {{");
+                classBuilder.AppendLine($"                  whereQueryBuilder.Append({p.Name});");
+                classBuilder.AppendLine($"                  isFirstWhere = false;");
+                classBuilder.AppendLine($"             }}");
+
+                classBuilder.AppendLine($"             else");
+                classBuilder.AppendLine($"             {{");
+                classBuilder.AppendLine($"                  whereQueryBuilder.Append(\" AND \"+{p.Name});");
+                classBuilder.AppendLine($"             }}");
+
                 classBuilder.AppendLine($"             parameters.Add(new SqlParameter(\"{parameterName}\", filter.{p.Name}));");
                 classBuilder.AppendLine($"        }}");
 
@@ -108,11 +148,11 @@ public class FilterExecutionGenerator
                 
                
                 // Query Execution
-                return new();
-                //_executor.ExecuteQuery<{entityName}>(selectClause, "{entityName}", whereClause, parameters, orderByClause, filter.PaginatedRequest);
+                return _executor.ExecuteQuery<{entityName}>(selectQueryBuilder.ToString(), "{entityName}", whereQueryBuilder.ToString(), parameters, orderByQueryBuilder.ToString(), filter.PaginatedRequest);
         """;
 
         classBuilder.AppendLine(lists);
+        
         classBuilder.AppendLine($"    }}\n");
 
         classBuilder.AppendLine(selectBuilder.ToString());

@@ -6,7 +6,7 @@ public class PersonFilter : IFilter
 {
     // For Every Filter
     public PaginatedRequest PaginatedRequest { get; set; }
-    public bool EagerLoading { get; set; }
+    public bool EagerLoading { get; set; } = true;
 
     // Id
     public int? IdEquals { get; set; }

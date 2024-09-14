@@ -1,8 +1,8 @@
 using Donut.Core.Filter;
 using Donut.QueryBuilding.Enum;
 using Donut.QueryBuilding.Utils;
-using Donut.QueryBuilding.Builder;
 using Donut.QueryBuilding.Execution;
+using Donut.QueryBuilding.Builder;
 using Microsoft.Data.SqlClient;
 using System.Text;
 using Donut.Core.Pagination;
@@ -20,400 +20,1062 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
     public PaginatedResponse<Person> Execute(PersonFilter filter)
     {
 
-        var queryBuilder = new StringBuilder();
+        var whereQueryBuilder = new StringBuilder();
+        var selectQueryBuilder = new StringBuilder();
+        var orderByQueryBuilder = new StringBuilder();
         var parameters = new List<SqlParameter>();
-        if (filter.SelectId)
+
+        bool isFirstSelect = true;
+        if (filter.EagerLoading)
         {
-             queryBuilder.Append(Id);
+            selectQueryBuilder.Append("*");
         }
-        if (filter.SelectName)
+        else
         {
-             queryBuilder.Append(Name);
+            if (filter.SelectId)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(Id);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+Id);
+                     isFirstSelect = false;
+                }
+            }
+            if (filter.SelectName)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(Name);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+Name);
+                     isFirstSelect = false;
+                }
+            }
+            if (filter.SelectAge)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(Age);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+Age);
+                     isFirstSelect = false;
+                }
+            }
+            if (filter.SelectAge1)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(Age1);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+Age1);
+                     isFirstSelect = false;
+                }
+            }
+            if (filter.SelectAgde1)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(Agde1);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+Agde1);
+                     isFirstSelect = false;
+                }
+            }
+            if (filter.Selectcool)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(cool);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+cool);
+                     isFirstSelect = false;
+                }
+            }
+            if (filter.SelectAgse1)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(Agse1);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+Agse1);
+                     isFirstSelect = false;
+                }
+            }
+            if (filter.SelectAgsse1)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(Agsse1);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+Agsse1);
+                     isFirstSelect = false;
+                }
+            }
+            if (filter.SelectAgse1f)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(Agse1f);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+Agse1f);
+                     isFirstSelect = false;
+                }
+            }
+            if (filter.SelectBirthDate)
+            {
+                if (isFirstSelect)
+                {
+                     selectQueryBuilder.Append(BirthDate);
+                }
+                else
+                {
+                     selectQueryBuilder.Append(", "+BirthDate);
+                     isFirstSelect = false;
+                }
+            }
         }
-        if (filter.SelectAge)
-        {
-             queryBuilder.Append(Age);
-        }
-        if (filter.SelectAge1)
-        {
-             queryBuilder.Append(Age1);
-        }
-        if (filter.SelectAgde1)
-        {
-             queryBuilder.Append(Agde1);
-        }
-        if (filter.Selectcool)
-        {
-             queryBuilder.Append(cool);
-        }
-        if (filter.SelectAgse1)
-        {
-             queryBuilder.Append(Agse1);
-        }
-        if (filter.SelectAgsse1)
-        {
-             queryBuilder.Append(Agsse1);
-        }
-        if (filter.SelectAgse1f)
-        {
-             queryBuilder.Append(Agse1f);
-        }
-        if (filter.SelectBirthDate)
-        {
-             queryBuilder.Append(BirthDate);
-        }
+
+        bool isFirstOrderBy = true;
         if (filter.OrderByIdAscending)
         {
-             queryBuilder.Append(OrderByIdAscending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByIdAscending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByIdAscending);
+            }
         }
         if (filter.OrderByIdDescending)
         {
-             queryBuilder.Append(OrderByIdDescending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByIdDescending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByIdDescending);
+            }
         }
         if (filter.OrderByNameAscending)
         {
-             queryBuilder.Append(OrderByNameAscending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByNameAscending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByNameAscending);
+            }
         }
         if (filter.OrderByNameDescending)
         {
-             queryBuilder.Append(OrderByNameDescending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByNameDescending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByNameDescending);
+            }
         }
         if (filter.OrderByAgeAscending)
         {
-             queryBuilder.Append(OrderByAgeAscending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgeAscending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgeAscending);
+            }
         }
         if (filter.OrderByAgeDescending)
         {
-             queryBuilder.Append(OrderByAgeDescending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgeDescending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgeDescending);
+            }
         }
         if (filter.OrderByAge1Ascending)
         {
-             queryBuilder.Append(OrderByAge1Ascending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAge1Ascending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAge1Ascending);
+            }
         }
         if (filter.OrderByAge1Descending)
         {
-             queryBuilder.Append(OrderByAge1Descending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAge1Descending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAge1Descending);
+            }
         }
         if (filter.OrderByAgde1Ascending)
         {
-             queryBuilder.Append(OrderByAgde1Ascending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgde1Ascending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgde1Ascending);
+            }
         }
         if (filter.OrderByAgde1Descending)
         {
-             queryBuilder.Append(OrderByAgde1Descending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgde1Descending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgde1Descending);
+            }
         }
         if (filter.OrderBycoolAscending)
         {
-             queryBuilder.Append(OrderBycoolAscending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderBycoolAscending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderBycoolAscending);
+            }
         }
         if (filter.OrderBycoolDescending)
         {
-             queryBuilder.Append(OrderBycoolDescending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderBycoolDescending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderBycoolDescending);
+            }
         }
         if (filter.OrderByAgse1Ascending)
         {
-             queryBuilder.Append(OrderByAgse1Ascending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgse1Ascending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgse1Ascending);
+            }
         }
         if (filter.OrderByAgse1Descending)
         {
-             queryBuilder.Append(OrderByAgse1Descending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgse1Descending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgse1Descending);
+            }
         }
         if (filter.OrderByAgsse1Ascending)
         {
-             queryBuilder.Append(OrderByAgsse1Ascending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgsse1Ascending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgsse1Ascending);
+            }
         }
         if (filter.OrderByAgsse1Descending)
         {
-             queryBuilder.Append(OrderByAgsse1Descending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgsse1Descending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgsse1Descending);
+            }
         }
         if (filter.OrderByAgse1fAscending)
         {
-             queryBuilder.Append(OrderByAgse1fAscending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgse1fAscending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgse1fAscending);
+            }
         }
         if (filter.OrderByAgse1fDescending)
         {
-             queryBuilder.Append(OrderByAgse1fDescending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByAgse1fDescending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByAgse1fDescending);
+            }
         }
         if (filter.OrderByBirthDateAscending)
         {
-             queryBuilder.Append(OrderByBirthDateAscending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByBirthDateAscending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByBirthDateAscending);
+            }
         }
         if (filter.OrderByBirthDateDescending)
         {
-             queryBuilder.Append(OrderByBirthDateDescending);
+            if (isFirstOrderBy)
+            {
+                 orderByQueryBuilder.Append(OrderByBirthDateDescending);
+                 isFirstOrderBy = false;
+            }
+            else
+            {
+                 orderByQueryBuilder.Append(", "+OrderByBirthDateDescending);
+            }
         }
+
+        bool isFirstWhere = true;
         if (filter.Agse1fBiggerThanOrEqualDate is not null)
         {
-             queryBuilder.Append(Agse1fBiggerThanOrEqualDate);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1fBiggerThanOrEqualDate);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1fBiggerThanOrEqualDate);
+             }
              parameters.Add(new SqlParameter("@p1", filter.Agse1fBiggerThanOrEqualDate));
         }
         if (filter.BirthDateBiggerThanOrEqualDate is not null)
         {
-             queryBuilder.Append(BirthDateBiggerThanOrEqualDate);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(BirthDateBiggerThanOrEqualDate);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+BirthDateBiggerThanOrEqualDate);
+             }
              parameters.Add(new SqlParameter("@p2", filter.BirthDateBiggerThanOrEqualDate));
         }
         if (filter.Agse1fBiggerThanDate is not null)
         {
-             queryBuilder.Append(Agse1fBiggerThanDate);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1fBiggerThanDate);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1fBiggerThanDate);
+             }
              parameters.Add(new SqlParameter("@p3", filter.Agse1fBiggerThanDate));
         }
         if (filter.BirthDateBiggerThanDate is not null)
         {
-             queryBuilder.Append(BirthDateBiggerThanDate);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(BirthDateBiggerThanDate);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+BirthDateBiggerThanDate);
+             }
              parameters.Add(new SqlParameter("@p4", filter.BirthDateBiggerThanDate));
         }
         if (filter.Agse1fLessThanOrEqualDate is not null)
         {
-             queryBuilder.Append(Agse1fLessThanOrEqualDate);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1fLessThanOrEqualDate);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1fLessThanOrEqualDate);
+             }
              parameters.Add(new SqlParameter("@p5", filter.Agse1fLessThanOrEqualDate));
         }
         if (filter.BirthDateLessThanOrEqualDate is not null)
         {
-             queryBuilder.Append(BirthDateLessThanOrEqualDate);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(BirthDateLessThanOrEqualDate);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+BirthDateLessThanOrEqualDate);
+             }
              parameters.Add(new SqlParameter("@p6", filter.BirthDateLessThanOrEqualDate));
         }
         if (filter.Agse1fLessThanDate is not null)
         {
-             queryBuilder.Append(Agse1fLessThanDate);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1fLessThanDate);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1fLessThanDate);
+             }
              parameters.Add(new SqlParameter("@p7", filter.Agse1fLessThanDate));
         }
         if (filter.BirthDateLessThanDate is not null)
         {
-             queryBuilder.Append(BirthDateLessThanDate);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(BirthDateLessThanDate);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+BirthDateLessThanDate);
+             }
              parameters.Add(new SqlParameter("@p8", filter.BirthDateLessThanDate));
         }
         if (filter.IdBiggerThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(IdBiggerThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(IdBiggerThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+IdBiggerThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p9", filter.IdBiggerThanOrEqualNumber));
         }
         if (filter.AgeBiggerThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(AgeBiggerThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(AgeBiggerThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+AgeBiggerThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p10", filter.AgeBiggerThanOrEqualNumber));
         }
         if (filter.Age1BiggerThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(Age1BiggerThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Age1BiggerThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Age1BiggerThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p11", filter.Age1BiggerThanOrEqualNumber));
         }
         if (filter.Agse1BiggerThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(Agse1BiggerThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1BiggerThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1BiggerThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p12", filter.Agse1BiggerThanOrEqualNumber));
         }
         if (filter.Agsse1BiggerThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(Agsse1BiggerThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agsse1BiggerThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agsse1BiggerThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p13", filter.Agsse1BiggerThanOrEqualNumber));
         }
         if (filter.IdBiggerThanNumber is not null)
         {
-             queryBuilder.Append(IdBiggerThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(IdBiggerThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+IdBiggerThanNumber);
+             }
              parameters.Add(new SqlParameter("@p14", filter.IdBiggerThanNumber));
         }
         if (filter.AgeBiggerThanNumber is not null)
         {
-             queryBuilder.Append(AgeBiggerThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(AgeBiggerThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+AgeBiggerThanNumber);
+             }
              parameters.Add(new SqlParameter("@p15", filter.AgeBiggerThanNumber));
         }
         if (filter.Age1BiggerThanNumber is not null)
         {
-             queryBuilder.Append(Age1BiggerThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Age1BiggerThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Age1BiggerThanNumber);
+             }
              parameters.Add(new SqlParameter("@p16", filter.Age1BiggerThanNumber));
         }
         if (filter.Agse1BiggerThanNumber is not null)
         {
-             queryBuilder.Append(Agse1BiggerThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1BiggerThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1BiggerThanNumber);
+             }
              parameters.Add(new SqlParameter("@p17", filter.Agse1BiggerThanNumber));
         }
         if (filter.Agsse1BiggerThanNumber is not null)
         {
-             queryBuilder.Append(Agsse1BiggerThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agsse1BiggerThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agsse1BiggerThanNumber);
+             }
              parameters.Add(new SqlParameter("@p18", filter.Agsse1BiggerThanNumber));
         }
         if (filter.IdLessThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(IdLessThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(IdLessThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+IdLessThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p19", filter.IdLessThanOrEqualNumber));
         }
         if (filter.AgeLessThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(AgeLessThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(AgeLessThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+AgeLessThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p20", filter.AgeLessThanOrEqualNumber));
         }
         if (filter.Age1LessThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(Age1LessThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Age1LessThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Age1LessThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p21", filter.Age1LessThanOrEqualNumber));
         }
         if (filter.Agse1LessThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(Agse1LessThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1LessThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1LessThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p22", filter.Agse1LessThanOrEqualNumber));
         }
         if (filter.Agsse1LessThanOrEqualNumber is not null)
         {
-             queryBuilder.Append(Agsse1LessThanOrEqualNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agsse1LessThanOrEqualNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agsse1LessThanOrEqualNumber);
+             }
              parameters.Add(new SqlParameter("@p23", filter.Agsse1LessThanOrEqualNumber));
         }
         if (filter.IdLessThanNumber is not null)
         {
-             queryBuilder.Append(IdLessThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(IdLessThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+IdLessThanNumber);
+             }
              parameters.Add(new SqlParameter("@p24", filter.IdLessThanNumber));
         }
         if (filter.AgeLessThanNumber is not null)
         {
-             queryBuilder.Append(AgeLessThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(AgeLessThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+AgeLessThanNumber);
+             }
              parameters.Add(new SqlParameter("@p25", filter.AgeLessThanNumber));
         }
         if (filter.Age1LessThanNumber is not null)
         {
-             queryBuilder.Append(Age1LessThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Age1LessThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Age1LessThanNumber);
+             }
              parameters.Add(new SqlParameter("@p26", filter.Age1LessThanNumber));
         }
         if (filter.Agse1LessThanNumber is not null)
         {
-             queryBuilder.Append(Agse1LessThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1LessThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1LessThanNumber);
+             }
              parameters.Add(new SqlParameter("@p27", filter.Agse1LessThanNumber));
         }
         if (filter.Agsse1LessThanNumber is not null)
         {
-             queryBuilder.Append(Agsse1LessThanNumber);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agsse1LessThanNumber);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agsse1LessThanNumber);
+             }
              parameters.Add(new SqlParameter("@p28", filter.Agsse1LessThanNumber));
         }
         if (filter.NameContains is not null)
         {
-             queryBuilder.Append(NameContains);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(NameContains);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+NameContains);
+             }
              parameters.Add(new SqlParameter("@p29", filter.NameContains));
         }
         if (filter.NameStartsWith is not null)
         {
-             queryBuilder.Append(NameStartsWith);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(NameStartsWith);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+NameStartsWith);
+             }
              parameters.Add(new SqlParameter("@p30", filter.NameStartsWith));
         }
         if (filter.NameEndsWith is not null)
         {
-             queryBuilder.Append(NameEndsWith);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(NameEndsWith);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+NameEndsWith);
+             }
              parameters.Add(new SqlParameter("@p31", filter.NameEndsWith));
         }
         if (filter.IdEquals is not null)
         {
-             queryBuilder.Append(IdEquals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(IdEquals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+IdEquals);
+             }
              parameters.Add(new SqlParameter("@p32", filter.IdEquals));
         }
         if (filter.NameEquals is not null)
         {
-             queryBuilder.Append(NameEquals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(NameEquals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+NameEquals);
+             }
              parameters.Add(new SqlParameter("@p33", filter.NameEquals));
         }
         if (filter.AgeEquals is not null)
         {
-             queryBuilder.Append(AgeEquals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(AgeEquals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+AgeEquals);
+             }
              parameters.Add(new SqlParameter("@p34", filter.AgeEquals));
         }
         if (filter.Age1Equals is not null)
         {
-             queryBuilder.Append(Age1Equals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Age1Equals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Age1Equals);
+             }
              parameters.Add(new SqlParameter("@p35", filter.Age1Equals));
         }
         if (filter.Agde1Equals is not null)
         {
-             queryBuilder.Append(Agde1Equals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agde1Equals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agde1Equals);
+             }
              parameters.Add(new SqlParameter("@p36", filter.Agde1Equals));
         }
         if (filter.coolEquals is not null)
         {
-             queryBuilder.Append(coolEquals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(coolEquals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+coolEquals);
+             }
              parameters.Add(new SqlParameter("@p37", filter.coolEquals));
         }
         if (filter.Agse1Equals is not null)
         {
-             queryBuilder.Append(Agse1Equals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1Equals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1Equals);
+             }
              parameters.Add(new SqlParameter("@p38", filter.Agse1Equals));
         }
         if (filter.Agsse1Equals is not null)
         {
-             queryBuilder.Append(Agsse1Equals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agsse1Equals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agsse1Equals);
+             }
              parameters.Add(new SqlParameter("@p39", filter.Agsse1Equals));
         }
         if (filter.Agse1fEquals is not null)
         {
-             queryBuilder.Append(Agse1fEquals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1fEquals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1fEquals);
+             }
              parameters.Add(new SqlParameter("@p40", filter.Agse1fEquals));
         }
         if (filter.BirthDateEquals is not null)
         {
-             queryBuilder.Append(BirthDateEquals);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(BirthDateEquals);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+BirthDateEquals);
+             }
              parameters.Add(new SqlParameter("@p41", filter.BirthDateEquals));
         }
         if (filter.IdNotEqual is not null)
         {
-             queryBuilder.Append(IdNotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(IdNotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+IdNotEqual);
+             }
              parameters.Add(new SqlParameter("@p42", filter.IdNotEqual));
         }
         if (filter.NameNotEqual is not null)
         {
-             queryBuilder.Append(NameNotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(NameNotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+NameNotEqual);
+             }
              parameters.Add(new SqlParameter("@p43", filter.NameNotEqual));
         }
         if (filter.AgeNotEqual is not null)
         {
-             queryBuilder.Append(AgeNotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(AgeNotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+AgeNotEqual);
+             }
              parameters.Add(new SqlParameter("@p44", filter.AgeNotEqual));
         }
         if (filter.Age1NotEqual is not null)
         {
-             queryBuilder.Append(Age1NotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Age1NotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Age1NotEqual);
+             }
              parameters.Add(new SqlParameter("@p45", filter.Age1NotEqual));
         }
         if (filter.Agde1NotEqual is not null)
         {
-             queryBuilder.Append(Agde1NotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agde1NotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agde1NotEqual);
+             }
              parameters.Add(new SqlParameter("@p46", filter.Agde1NotEqual));
         }
         if (filter.coolNotEqual is not null)
         {
-             queryBuilder.Append(coolNotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(coolNotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+coolNotEqual);
+             }
              parameters.Add(new SqlParameter("@p47", filter.coolNotEqual));
         }
         if (filter.Agse1NotEqual is not null)
         {
-             queryBuilder.Append(Agse1NotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1NotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1NotEqual);
+             }
              parameters.Add(new SqlParameter("@p48", filter.Agse1NotEqual));
         }
         if (filter.Agsse1NotEqual is not null)
         {
-             queryBuilder.Append(Agsse1NotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agsse1NotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agsse1NotEqual);
+             }
              parameters.Add(new SqlParameter("@p49", filter.Agsse1NotEqual));
         }
         if (filter.Agse1fNotEqual is not null)
         {
-             queryBuilder.Append(Agse1fNotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(Agse1fNotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+Agse1fNotEqual);
+             }
              parameters.Add(new SqlParameter("@p50", filter.Agse1fNotEqual));
         }
         if (filter.BirthDateNotEqual is not null)
         {
-             queryBuilder.Append(BirthDateNotEqual);
+             if(isFirstWhere)
+             {
+                  whereQueryBuilder.Append(BirthDateNotEqual);
+                  isFirstWhere = false;
+             }
+             else
+             {
+                  whereQueryBuilder.Append(" AND "+BirthDateNotEqual);
+             }
              parameters.Add(new SqlParameter("@p51", filter.BirthDateNotEqual));
         }
         
        
         // Query Execution
-        return new();
-        //_executor.ExecuteQuery<Person>(selectClause, "Person", whereClause, parameters, orderByClause, filter.PaginatedRequest);
+        return _executor.ExecuteQuery<Person>(selectQueryBuilder.ToString(), "Person", whereQueryBuilder.ToString(), parameters, orderByQueryBuilder.ToString(), filter.PaginatedRequest);
     }
 
-    private static readonly string Id = "Id";
-    private static readonly string Name = "Name";
-    private static readonly string Age = "Age";
-    private static readonly string Age1 = "Age1";
-    private static readonly string Agde1 = "Agde1";
-    private static readonly string cool = "cool";
-    private static readonly string Agse1 = "Agse1";
-    private static readonly string Agsse1 = "Agsse1";
-    private static readonly string Agse1f = "Agse1f";
-    private static readonly string BirthDate = "BirthDate";
+    private static readonly string Id = "[Id]";
+    private static readonly string Name = "[Name]";
+    private static readonly string Age = "[Age]";
+    private static readonly string Age1 = "[Age1]";
+    private static readonly string Agde1 = "[Agde1]";
+    private static readonly string cool = "[cool]";
+    private static readonly string Agse1 = "[Agse1]";
+    private static readonly string Agsse1 = "[Agsse1]";
+    private static readonly string Agse1f = "[Agse1f]";
+    private static readonly string BirthDate = "[BirthDate]";
 
     private static readonly string OrderByIdAscending = "[Id] ASC";
     private static readonly string OrderByIdDescending = "[Id] DESC";

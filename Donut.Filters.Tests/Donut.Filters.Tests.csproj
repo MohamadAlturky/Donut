@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Donut.Filters\Donut.Filters.csproj" />
+    <ProjectReference Include="..\Donut.QueryBuilding\Donut.QueryBuilding.csproj" />
   </ItemGroup>
 
 </Project>
