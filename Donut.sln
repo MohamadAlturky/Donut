@@ -3,21 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Donut.Core", "Donut.Core\Donut.Core.csproj", "{2A2F2C41-5C6F-4829-8140-3330080DA391}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donut.Core", "Donut.Core\Donut.Core.csproj", "{2A2F2C41-5C6F-4829-8140-3330080DA391}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Donut.Filters", "Donut.Filters\Donut.Filters.csproj", "{181DE24B-136E-455B-9DD5-383C7E683747}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donut.Filters", "Donut.Filters\Donut.Filters.csproj", "{181DE24B-136E-455B-9DD5-383C7E683747}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9CCB26FC-57FD-4C19-A823-8E627C58A1FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Donut.Filters.Tests", "Donut.Filters.Tests\Donut.Filters.Tests.csproj", "{510D7D1B-24F2-49ED-ADE7-33F24305CF39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donut.Filters.Tests", "Donut.Filters.Tests\Donut.Filters.Tests.csproj", "{510D7D1B-24F2-49ED-ADE7-33F24305CF39}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{80DCA1FC-CF68-4356-B8A7-495823286097}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Donut.QueryBuilding", "Donut.QueryBuilding\Donut.QueryBuilding.csproj", "{06AE8C02-59A9-41BF-946E-7AEBEBEF53FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donut.QueryBuilding", "Donut.QueryBuilding\Donut.QueryBuilding.csproj", "{06AE8C02-59A9-41BF-946E-7AEBEBEF53FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Donut.Filters.Execution", "Donut.Filters.Execution\Donut.Filters.Execution.csproj", "{C14B7EDB-C176-43D5-8CE4-349A291018B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donut.Filters.Execution", "Donut.Filters.Execution\Donut.Filters.Execution.csproj", "{C14B7EDB-C176-43D5-8CE4-349A291018B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Donut.Filters.Execution.Tests", "Donut.Filters.Execution.Tests\Donut.Filters.Execution.Tests.csproj", "{46C44F33-658C-4F61-AED0-EBE448280C3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donut.Filters.Execution.Tests", "Donut.Filters.Execution.Tests\Donut.Filters.Execution.Tests.csproj", "{46C44F33-658C-4F61-AED0-EBE448280C3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{E236C919-C466-42A8-9F24-B1A785D2E4EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,10 +57,10 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2A2F2C41-5C6F-4829-8140-3330080DA391} = {80DCA1FC-CF68-4356-B8A7-495823286097}
-		{181DE24B-136E-455B-9DD5-383C7E683747} = {80DCA1FC-CF68-4356-B8A7-495823286097}
+		{181DE24B-136E-455B-9DD5-383C7E683747} = {E236C919-C466-42A8-9F24-B1A785D2E4EA}
 		{510D7D1B-24F2-49ED-ADE7-33F24305CF39} = {9CCB26FC-57FD-4C19-A823-8E627C58A1FA}
 		{06AE8C02-59A9-41BF-946E-7AEBEBEF53FD} = {80DCA1FC-CF68-4356-B8A7-495823286097}
-		{C14B7EDB-C176-43D5-8CE4-349A291018B8} = {80DCA1FC-CF68-4356-B8A7-495823286097}
+		{C14B7EDB-C176-43D5-8CE4-349A291018B8} = {E236C919-C466-42A8-9F24-B1A785D2E4EA}
 		{46C44F33-658C-4F61-AED0-EBE448280C3A} = {9CCB26FC-57FD-4C19-A823-8E627C58A1FA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

@@ -1,11 +1,19 @@
 using Donut.Core.Filter;
 using Donut.QueryBuilding.Enum;
 using Donut.QueryBuilding.Utils;
+using Donut.QueryBuilding.Builder;
+using Donut.QueryBuilding.Execution;
 using Donut.Core.Pagination;
 
 namespace Donut.Filters.Execution;
 public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
 {
+    private readonly QueryExecutor _executor;
+
+    public PersonFilterExecutor(QueryExecutor executor)
+    {
+        _executor=executor;
+    }
     // For Every Filter
     public PaginatedResponse<Person> Execute(PersonFilter filter)
     {
@@ -325,7 +333,14 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
         {
              whereList.Add(new Where<object>() { Column = "BirthDateNot",Value=filter.BirthDateNotEquals,Action=Operator.Equals });
         }
-return new();
+        
+        // Query Building 
+        var orderByClause = SQLQueryBuilder.BuildOrderByClause(orderByList);
+        var (whereClause,parameters) = SQLQueryBuilder.BuildWhereClause(whereList);
+        var selectClause = SQLQueryBuilder.BuildSelectClause(selectList);
+
+        // Query Execution
+        return _executor.ExecuteQuery<Person>(selectClause, "Person", whereClause, parameters, orderByClause, filter.PaginatedRequest);
     }
 
 }

@@ -16,10 +16,21 @@ public class FilterExecutionGenerator
         classBuilder.AppendLine($"using Donut.Core.Filter;");
         classBuilder.AppendLine($"using Donut.QueryBuilding.Enum;");
         classBuilder.AppendLine($"using Donut.QueryBuilding.Utils;");
+        classBuilder.AppendLine($"using Donut.QueryBuilding.Builder;");
+        classBuilder.AppendLine($"using Donut.QueryBuilding.Execution;");
         classBuilder.AppendLine($"using Donut.Core.Pagination;\n");
         classBuilder.AppendLine($"namespace {namespaceName};");
         classBuilder.AppendLine($"public class {className}: IFilterExecutor<{entityName},{inputType.Name}>");
         classBuilder.AppendLine("{");
+        var privateMembers = """
+                private readonly QueryExecutor _executor;
+
+                public PersonFilterExecutor(QueryExecutor executor)
+                {
+                    _executor=executor;
+                }
+            """;
+        classBuilder.AppendLine(privateMembers);
         classBuilder.AppendLine($"    // For Every Filter");
         classBuilder.AppendLine($"    public PaginatedResponse<{entityName}> Execute({inputType.Name} filter)");
         classBuilder.AppendLine($"    {{\n");
@@ -76,7 +87,18 @@ public class FilterExecutionGenerator
             });
             Console.WriteLine();
         }
-        classBuilder.AppendLine("return new();");
+        var lists = $"""
+                
+                // Query Building 
+                var orderByClause = SQLQueryBuilder.BuildOrderByClause(orderByList);
+                var (whereClause,parameters) = SQLQueryBuilder.BuildWhereClause(whereList);
+                var selectClause = SQLQueryBuilder.BuildSelectClause(selectList);
+
+                // Query Execution
+                return _executor.ExecuteQuery<{entityName}>(selectClause, "{entityName}", whereClause, parameters, orderByClause, filter.PaginatedRequest);
+        """;
+
+        classBuilder.AppendLine(lists);
         classBuilder.AppendLine($"    }}\n");
 
         
