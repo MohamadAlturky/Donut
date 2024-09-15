@@ -6,7 +6,7 @@ public class PersonFilter: IFilter
 {
     // For Every Filter
     public PaginatedRequest PaginatedRequest { get; set; }
-    public bool EagerLoading { get; set; }
+    public bool EagerLoading { get; set; } = true;
 
     // Id
     public int? IdEquals { get; set; }
@@ -43,80 +43,80 @@ public class PersonFilter: IFilter
     public int? AgeBiggerThanOrEqualNumber { get; set; }
 
 
-    // Age1
-    public long? Age1Equals { get; set; }
-    public long? Age1NotEqual { get; set; }
-    public bool SelectAge1 { get; set; }
-    public bool OrderByAge1Ascending { get; set; }
-    public bool OrderByAge1Descending { get; set; }
-    public long? Age1LessThanNumber { get; set; }
-    public long? Age1BiggerThanNumber { get; set; }
-    public long? Age1LessThanOrEqualNumber { get; set; }
-    public long? Age1BiggerThanOrEqualNumber { get; set; }
+    // Wifes
+    public long? WifesEquals { get; set; }
+    public long? WifesNotEqual { get; set; }
+    public bool SelectWifes { get; set; }
+    public bool OrderByWifesAscending { get; set; }
+    public bool OrderByWifesDescending { get; set; }
+    public long? WifesLessThanNumber { get; set; }
+    public long? WifesBiggerThanNumber { get; set; }
+    public long? WifesLessThanOrEqualNumber { get; set; }
+    public long? WifesBiggerThanOrEqualNumber { get; set; }
 
 
-    // Agde1
-    public char? Agde1Equals { get; set; }
-    public char? Agde1NotEqual { get; set; }
-    public bool SelectAgde1 { get; set; }
-    public bool OrderByAgde1Ascending { get; set; }
-    public bool OrderByAgde1Descending { get; set; }
+    // Char
+    public char? CharEquals { get; set; }
+    public char? CharNotEqual { get; set; }
+    public bool SelectChar { get; set; }
+    public bool OrderByCharAscending { get; set; }
+    public bool OrderByCharDescending { get; set; }
 
 
-    // cool
-    public bool? coolEquals { get; set; }
-    public bool? coolNotEqual { get; set; }
-    public bool Selectcool { get; set; }
-    public bool OrderBycoolAscending { get; set; }
-    public bool OrderBycoolDescending { get; set; }
+    // Alive
+    public bool? AliveEquals { get; set; }
+    public bool? AliveNotEqual { get; set; }
+    public bool SelectAlive { get; set; }
+    public bool OrderByAliveAscending { get; set; }
+    public bool OrderByAliveDescending { get; set; }
 
 
-    // Agse1
-    public double? Agse1Equals { get; set; }
-    public double? Agse1NotEqual { get; set; }
-    public bool SelectAgse1 { get; set; }
-    public bool OrderByAgse1Ascending { get; set; }
-    public bool OrderByAgse1Descending { get; set; }
-    public double? Agse1LessThanNumber { get; set; }
-    public double? Agse1BiggerThanNumber { get; set; }
-    public double? Agse1LessThanOrEqualNumber { get; set; }
-    public double? Agse1BiggerThanOrEqualNumber { get; set; }
+    // Importance
+    public double? ImportanceEquals { get; set; }
+    public double? ImportanceNotEqual { get; set; }
+    public bool SelectImportance { get; set; }
+    public bool OrderByImportanceAscending { get; set; }
+    public bool OrderByImportanceDescending { get; set; }
+    public double? ImportanceLessThanNumber { get; set; }
+    public double? ImportanceBiggerThanNumber { get; set; }
+    public double? ImportanceLessThanOrEqualNumber { get; set; }
+    public double? ImportanceBiggerThanOrEqualNumber { get; set; }
 
 
-    // Agsse1
-    public decimal? Agsse1Equals { get; set; }
-    public decimal? Agsse1NotEqual { get; set; }
-    public bool SelectAgsse1 { get; set; }
-    public bool OrderByAgsse1Ascending { get; set; }
-    public bool OrderByAgsse1Descending { get; set; }
-    public decimal? Agsse1LessThanNumber { get; set; }
-    public decimal? Agsse1BiggerThanNumber { get; set; }
-    public decimal? Agsse1LessThanOrEqualNumber { get; set; }
-    public decimal? Agsse1BiggerThanOrEqualNumber { get; set; }
+    // NonImportance
+    public decimal? NonImportanceEquals { get; set; }
+    public decimal? NonImportanceNotEqual { get; set; }
+    public bool SelectNonImportance { get; set; }
+    public bool OrderByNonImportanceAscending { get; set; }
+    public bool OrderByNonImportanceDescending { get; set; }
+    public decimal? NonImportanceLessThanNumber { get; set; }
+    public decimal? NonImportanceBiggerThanNumber { get; set; }
+    public decimal? NonImportanceLessThanOrEqualNumber { get; set; }
+    public decimal? NonImportanceBiggerThanOrEqualNumber { get; set; }
 
 
-    // Agse1f
-    public DateOnly? Agse1fEquals { get; set; }
-    public DateOnly? Agse1fNotEqual { get; set; }
-    public bool SelectAgse1f { get; set; }
-    public bool OrderByAgse1fAscending { get; set; }
-    public bool OrderByAgse1fDescending { get; set; }
-    public DateOnly? Agse1fLessThanDate { get; set; }
-    public DateOnly? Agse1fBiggerThanDate { get; set; }
-    public DateOnly? Agse1fLessThanOrEqualDate { get; set; }
-    public DateOnly? Agse1fBiggerThanOrEqualDate { get; set; }
+    // Year
+    public DateOnly? YearEquals { get; set; }
+    public DateOnly? YearNotEqual { get; set; }
+    public bool SelectYear { get; set; }
+    public bool OrderByYearAscending { get; set; }
+    public bool OrderByYearDescending { get; set; }
+    public DateOnly? YearLessThanDate { get; set; }
+    public DateOnly? YearBiggerThanDate { get; set; }
+    public DateOnly? YearLessThanOrEqualDate { get; set; }
+    public DateOnly? YearBiggerThanOrEqualDate { get; set; }
 
 
-    // BirthDate
-    public DateTime? BirthDateEquals { get; set; }
-    public DateTime? BirthDateNotEqual { get; set; }
-    public bool SelectBirthDate { get; set; }
-    public bool OrderByBirthDateAscending { get; set; }
-    public bool OrderByBirthDateDescending { get; set; }
-    public DateTime? BirthDateLessThanDate { get; set; }
-    public DateTime? BirthDateBiggerThanDate { get; set; }
-    public DateTime? BirthDateLessThanOrEqualDate { get; set; }
-    public DateTime? BirthDateBiggerThanOrEqualDate { get; set; }
+    // DateOfBirth
+    public DateTime? DateOfBirthEquals { get; set; }
+    public DateTime? DateOfBirthNotEqual { get; set; }
+    public bool SelectDateOfBirth { get; set; }
+    public bool OrderByDateOfBirthAscending { get; set; }
+    public bool OrderByDateOfBirthDescending { get; set; }
+    public DateTime? DateOfBirthLessThanDate { get; set; }
+    public DateTime? DateOfBirthBiggerThanDate { get; set; }
+    public DateTime? DateOfBirthLessThanOrEqualDate { get; set; }
+    public DateTime? DateOfBirthBiggerThanOrEqualDate { get; set; }
 
 
 }

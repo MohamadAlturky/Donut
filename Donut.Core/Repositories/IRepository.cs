@@ -1,8 +1,13 @@
-﻿namespace Donut.SharedKernel.Repositories;
+﻿using System.Data;
+
+namespace Donut.SharedKernel.Repositories;
 
 public interface IRepository<T>
 {
-    T Add(T entity);
-    void Update(T entity);
-    void Delete(T entity);
+    Task<T> Add(T entity);
+    Task Update(T entity);
+    Task Delete(T entity);
+    Task<T> AddTransactional(T entity, IDbConnection connection, IDbTransaction transaction);
+    Task UpdateTransactional(T entity, IDbConnection connection, IDbTransaction transaction);
+    Task DeleteTransactional(T entity, IDbConnection connection, IDbTransaction transaction);
 }

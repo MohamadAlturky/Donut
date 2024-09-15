@@ -68,87 +68,87 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
                      isFirstSelect = false;
                 }
             }
-            if (filter.SelectAge1)
+            if (filter.SelectWifes)
             {
                 if (isFirstSelect)
                 {
-                     selectQueryBuilder.Append(Age1);
+                     selectQueryBuilder.Append(Wifes);
                 }
                 else
                 {
-                     selectQueryBuilder.Append(", "+Age1);
+                     selectQueryBuilder.Append(", "+Wifes);
                      isFirstSelect = false;
                 }
             }
-            if (filter.SelectAgde1)
+            if (filter.SelectChar)
             {
                 if (isFirstSelect)
                 {
-                     selectQueryBuilder.Append(Agde1);
+                     selectQueryBuilder.Append(Char);
                 }
                 else
                 {
-                     selectQueryBuilder.Append(", "+Agde1);
+                     selectQueryBuilder.Append(", "+Char);
                      isFirstSelect = false;
                 }
             }
-            if (filter.Selectcool)
+            if (filter.SelectAlive)
             {
                 if (isFirstSelect)
                 {
-                     selectQueryBuilder.Append(cool);
+                     selectQueryBuilder.Append(Alive);
                 }
                 else
                 {
-                     selectQueryBuilder.Append(", "+cool);
+                     selectQueryBuilder.Append(", "+Alive);
                      isFirstSelect = false;
                 }
             }
-            if (filter.SelectAgse1)
+            if (filter.SelectImportance)
             {
                 if (isFirstSelect)
                 {
-                     selectQueryBuilder.Append(Agse1);
+                     selectQueryBuilder.Append(Importance);
                 }
                 else
                 {
-                     selectQueryBuilder.Append(", "+Agse1);
+                     selectQueryBuilder.Append(", "+Importance);
                      isFirstSelect = false;
                 }
             }
-            if (filter.SelectAgsse1)
+            if (filter.SelectNonImportance)
             {
                 if (isFirstSelect)
                 {
-                     selectQueryBuilder.Append(Agsse1);
+                     selectQueryBuilder.Append(NonImportance);
                 }
                 else
                 {
-                     selectQueryBuilder.Append(", "+Agsse1);
+                     selectQueryBuilder.Append(", "+NonImportance);
                      isFirstSelect = false;
                 }
             }
-            if (filter.SelectAgse1f)
+            if (filter.SelectYear)
             {
                 if (isFirstSelect)
                 {
-                     selectQueryBuilder.Append(Agse1f);
+                     selectQueryBuilder.Append(Year);
                 }
                 else
                 {
-                     selectQueryBuilder.Append(", "+Agse1f);
+                     selectQueryBuilder.Append(", "+Year);
                      isFirstSelect = false;
                 }
             }
-            if (filter.SelectBirthDate)
+            if (filter.SelectDateOfBirth)
             {
                 if (isFirstSelect)
                 {
-                     selectQueryBuilder.Append(BirthDate);
+                     selectQueryBuilder.Append(DateOfBirth);
                 }
                 else
                 {
-                     selectQueryBuilder.Append(", "+BirthDate);
+                     selectQueryBuilder.Append(", "+DateOfBirth);
                      isFirstSelect = false;
                 }
             }
@@ -227,279 +227,279 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
                  orderByQueryBuilder.Append(", "+OrderByAgeDescending);
             }
         }
-        if (filter.OrderByAge1Ascending)
+        if (filter.OrderByWifesAscending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAge1Ascending);
+                 orderByQueryBuilder.Append(OrderByWifesAscending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAge1Ascending);
+                 orderByQueryBuilder.Append(", "+OrderByWifesAscending);
             }
         }
-        if (filter.OrderByAge1Descending)
+        if (filter.OrderByWifesDescending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAge1Descending);
+                 orderByQueryBuilder.Append(OrderByWifesDescending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAge1Descending);
+                 orderByQueryBuilder.Append(", "+OrderByWifesDescending);
             }
         }
-        if (filter.OrderByAgde1Ascending)
+        if (filter.OrderByCharAscending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAgde1Ascending);
+                 orderByQueryBuilder.Append(OrderByCharAscending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAgde1Ascending);
+                 orderByQueryBuilder.Append(", "+OrderByCharAscending);
             }
         }
-        if (filter.OrderByAgde1Descending)
+        if (filter.OrderByCharDescending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAgde1Descending);
+                 orderByQueryBuilder.Append(OrderByCharDescending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAgde1Descending);
+                 orderByQueryBuilder.Append(", "+OrderByCharDescending);
             }
         }
-        if (filter.OrderBycoolAscending)
+        if (filter.OrderByAliveAscending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderBycoolAscending);
+                 orderByQueryBuilder.Append(OrderByAliveAscending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderBycoolAscending);
+                 orderByQueryBuilder.Append(", "+OrderByAliveAscending);
             }
         }
-        if (filter.OrderBycoolDescending)
+        if (filter.OrderByAliveDescending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderBycoolDescending);
+                 orderByQueryBuilder.Append(OrderByAliveDescending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderBycoolDescending);
+                 orderByQueryBuilder.Append(", "+OrderByAliveDescending);
             }
         }
-        if (filter.OrderByAgse1Ascending)
+        if (filter.OrderByImportanceAscending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAgse1Ascending);
+                 orderByQueryBuilder.Append(OrderByImportanceAscending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAgse1Ascending);
+                 orderByQueryBuilder.Append(", "+OrderByImportanceAscending);
             }
         }
-        if (filter.OrderByAgse1Descending)
+        if (filter.OrderByImportanceDescending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAgse1Descending);
+                 orderByQueryBuilder.Append(OrderByImportanceDescending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAgse1Descending);
+                 orderByQueryBuilder.Append(", "+OrderByImportanceDescending);
             }
         }
-        if (filter.OrderByAgsse1Ascending)
+        if (filter.OrderByNonImportanceAscending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAgsse1Ascending);
+                 orderByQueryBuilder.Append(OrderByNonImportanceAscending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAgsse1Ascending);
+                 orderByQueryBuilder.Append(", "+OrderByNonImportanceAscending);
             }
         }
-        if (filter.OrderByAgsse1Descending)
+        if (filter.OrderByNonImportanceDescending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAgsse1Descending);
+                 orderByQueryBuilder.Append(OrderByNonImportanceDescending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAgsse1Descending);
+                 orderByQueryBuilder.Append(", "+OrderByNonImportanceDescending);
             }
         }
-        if (filter.OrderByAgse1fAscending)
+        if (filter.OrderByYearAscending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAgse1fAscending);
+                 orderByQueryBuilder.Append(OrderByYearAscending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAgse1fAscending);
+                 orderByQueryBuilder.Append(", "+OrderByYearAscending);
             }
         }
-        if (filter.OrderByAgse1fDescending)
+        if (filter.OrderByYearDescending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByAgse1fDescending);
+                 orderByQueryBuilder.Append(OrderByYearDescending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByAgse1fDescending);
+                 orderByQueryBuilder.Append(", "+OrderByYearDescending);
             }
         }
-        if (filter.OrderByBirthDateAscending)
+        if (filter.OrderByDateOfBirthAscending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByBirthDateAscending);
+                 orderByQueryBuilder.Append(OrderByDateOfBirthAscending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByBirthDateAscending);
+                 orderByQueryBuilder.Append(", "+OrderByDateOfBirthAscending);
             }
         }
-        if (filter.OrderByBirthDateDescending)
+        if (filter.OrderByDateOfBirthDescending)
         {
             if (isFirstOrderBy)
             {
-                 orderByQueryBuilder.Append(OrderByBirthDateDescending);
+                 orderByQueryBuilder.Append(OrderByDateOfBirthDescending);
                  isFirstOrderBy = false;
             }
             else
             {
-                 orderByQueryBuilder.Append(", "+OrderByBirthDateDescending);
+                 orderByQueryBuilder.Append(", "+OrderByDateOfBirthDescending);
             }
         }
 
         bool isFirstWhere = true;
-        if (filter.Agse1fBiggerThanOrEqualDate is not null)
+        if (filter.YearBiggerThanOrEqualDate is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1fBiggerThanOrEqualDate);
+                  whereQueryBuilder.Append(YearBiggerThanOrEqualDate);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1fBiggerThanOrEqualDate);
+                  whereQueryBuilder.Append(" AND "+YearBiggerThanOrEqualDate);
              }
-             parameters.Add(new SqlParameter("@p1", filter.Agse1fBiggerThanOrEqualDate));
+             parameters.Add(new SqlParameter("@p1", filter.YearBiggerThanOrEqualDate));
         }
-        if (filter.BirthDateBiggerThanOrEqualDate is not null)
+        if (filter.DateOfBirthBiggerThanOrEqualDate is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(BirthDateBiggerThanOrEqualDate);
+                  whereQueryBuilder.Append(DateOfBirthBiggerThanOrEqualDate);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+BirthDateBiggerThanOrEqualDate);
+                  whereQueryBuilder.Append(" AND "+DateOfBirthBiggerThanOrEqualDate);
              }
-             parameters.Add(new SqlParameter("@p2", filter.BirthDateBiggerThanOrEqualDate));
+             parameters.Add(new SqlParameter("@p2", filter.DateOfBirthBiggerThanOrEqualDate));
         }
-        if (filter.Agse1fBiggerThanDate is not null)
+        if (filter.YearBiggerThanDate is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1fBiggerThanDate);
+                  whereQueryBuilder.Append(YearBiggerThanDate);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1fBiggerThanDate);
+                  whereQueryBuilder.Append(" AND "+YearBiggerThanDate);
              }
-             parameters.Add(new SqlParameter("@p3", filter.Agse1fBiggerThanDate));
+             parameters.Add(new SqlParameter("@p3", filter.YearBiggerThanDate));
         }
-        if (filter.BirthDateBiggerThanDate is not null)
+        if (filter.DateOfBirthBiggerThanDate is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(BirthDateBiggerThanDate);
+                  whereQueryBuilder.Append(DateOfBirthBiggerThanDate);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+BirthDateBiggerThanDate);
+                  whereQueryBuilder.Append(" AND "+DateOfBirthBiggerThanDate);
              }
-             parameters.Add(new SqlParameter("@p4", filter.BirthDateBiggerThanDate));
+             parameters.Add(new SqlParameter("@p4", filter.DateOfBirthBiggerThanDate));
         }
-        if (filter.Agse1fLessThanOrEqualDate is not null)
+        if (filter.YearLessThanOrEqualDate is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1fLessThanOrEqualDate);
+                  whereQueryBuilder.Append(YearLessThanOrEqualDate);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1fLessThanOrEqualDate);
+                  whereQueryBuilder.Append(" AND "+YearLessThanOrEqualDate);
              }
-             parameters.Add(new SqlParameter("@p5", filter.Agse1fLessThanOrEqualDate));
+             parameters.Add(new SqlParameter("@p5", filter.YearLessThanOrEqualDate));
         }
-        if (filter.BirthDateLessThanOrEqualDate is not null)
+        if (filter.DateOfBirthLessThanOrEqualDate is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(BirthDateLessThanOrEqualDate);
+                  whereQueryBuilder.Append(DateOfBirthLessThanOrEqualDate);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+BirthDateLessThanOrEqualDate);
+                  whereQueryBuilder.Append(" AND "+DateOfBirthLessThanOrEqualDate);
              }
-             parameters.Add(new SqlParameter("@p6", filter.BirthDateLessThanOrEqualDate));
+             parameters.Add(new SqlParameter("@p6", filter.DateOfBirthLessThanOrEqualDate));
         }
-        if (filter.Agse1fLessThanDate is not null)
+        if (filter.YearLessThanDate is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1fLessThanDate);
+                  whereQueryBuilder.Append(YearLessThanDate);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1fLessThanDate);
+                  whereQueryBuilder.Append(" AND "+YearLessThanDate);
              }
-             parameters.Add(new SqlParameter("@p7", filter.Agse1fLessThanDate));
+             parameters.Add(new SqlParameter("@p7", filter.YearLessThanDate));
         }
-        if (filter.BirthDateLessThanDate is not null)
+        if (filter.DateOfBirthLessThanDate is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(BirthDateLessThanDate);
+                  whereQueryBuilder.Append(DateOfBirthLessThanDate);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+BirthDateLessThanDate);
+                  whereQueryBuilder.Append(" AND "+DateOfBirthLessThanDate);
              }
-             parameters.Add(new SqlParameter("@p8", filter.BirthDateLessThanDate));
+             parameters.Add(new SqlParameter("@p8", filter.DateOfBirthLessThanDate));
         }
         if (filter.IdBiggerThanOrEqualNumber is not null)
         {
@@ -527,44 +527,44 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
              }
              parameters.Add(new SqlParameter("@p10", filter.AgeBiggerThanOrEqualNumber));
         }
-        if (filter.Age1BiggerThanOrEqualNumber is not null)
+        if (filter.WifesBiggerThanOrEqualNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Age1BiggerThanOrEqualNumber);
+                  whereQueryBuilder.Append(WifesBiggerThanOrEqualNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Age1BiggerThanOrEqualNumber);
+                  whereQueryBuilder.Append(" AND "+WifesBiggerThanOrEqualNumber);
              }
-             parameters.Add(new SqlParameter("@p11", filter.Age1BiggerThanOrEqualNumber));
+             parameters.Add(new SqlParameter("@p11", filter.WifesBiggerThanOrEqualNumber));
         }
-        if (filter.Agse1BiggerThanOrEqualNumber is not null)
+        if (filter.ImportanceBiggerThanOrEqualNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1BiggerThanOrEqualNumber);
+                  whereQueryBuilder.Append(ImportanceBiggerThanOrEqualNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1BiggerThanOrEqualNumber);
+                  whereQueryBuilder.Append(" AND "+ImportanceBiggerThanOrEqualNumber);
              }
-             parameters.Add(new SqlParameter("@p12", filter.Agse1BiggerThanOrEqualNumber));
+             parameters.Add(new SqlParameter("@p12", filter.ImportanceBiggerThanOrEqualNumber));
         }
-        if (filter.Agsse1BiggerThanOrEqualNumber is not null)
+        if (filter.NonImportanceBiggerThanOrEqualNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agsse1BiggerThanOrEqualNumber);
+                  whereQueryBuilder.Append(NonImportanceBiggerThanOrEqualNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agsse1BiggerThanOrEqualNumber);
+                  whereQueryBuilder.Append(" AND "+NonImportanceBiggerThanOrEqualNumber);
              }
-             parameters.Add(new SqlParameter("@p13", filter.Agsse1BiggerThanOrEqualNumber));
+             parameters.Add(new SqlParameter("@p13", filter.NonImportanceBiggerThanOrEqualNumber));
         }
         if (filter.IdBiggerThanNumber is not null)
         {
@@ -592,44 +592,44 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
              }
              parameters.Add(new SqlParameter("@p15", filter.AgeBiggerThanNumber));
         }
-        if (filter.Age1BiggerThanNumber is not null)
+        if (filter.WifesBiggerThanNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Age1BiggerThanNumber);
+                  whereQueryBuilder.Append(WifesBiggerThanNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Age1BiggerThanNumber);
+                  whereQueryBuilder.Append(" AND "+WifesBiggerThanNumber);
              }
-             parameters.Add(new SqlParameter("@p16", filter.Age1BiggerThanNumber));
+             parameters.Add(new SqlParameter("@p16", filter.WifesBiggerThanNumber));
         }
-        if (filter.Agse1BiggerThanNumber is not null)
+        if (filter.ImportanceBiggerThanNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1BiggerThanNumber);
+                  whereQueryBuilder.Append(ImportanceBiggerThanNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1BiggerThanNumber);
+                  whereQueryBuilder.Append(" AND "+ImportanceBiggerThanNumber);
              }
-             parameters.Add(new SqlParameter("@p17", filter.Agse1BiggerThanNumber));
+             parameters.Add(new SqlParameter("@p17", filter.ImportanceBiggerThanNumber));
         }
-        if (filter.Agsse1BiggerThanNumber is not null)
+        if (filter.NonImportanceBiggerThanNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agsse1BiggerThanNumber);
+                  whereQueryBuilder.Append(NonImportanceBiggerThanNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agsse1BiggerThanNumber);
+                  whereQueryBuilder.Append(" AND "+NonImportanceBiggerThanNumber);
              }
-             parameters.Add(new SqlParameter("@p18", filter.Agsse1BiggerThanNumber));
+             parameters.Add(new SqlParameter("@p18", filter.NonImportanceBiggerThanNumber));
         }
         if (filter.IdLessThanOrEqualNumber is not null)
         {
@@ -657,44 +657,44 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
              }
              parameters.Add(new SqlParameter("@p20", filter.AgeLessThanOrEqualNumber));
         }
-        if (filter.Age1LessThanOrEqualNumber is not null)
+        if (filter.WifesLessThanOrEqualNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Age1LessThanOrEqualNumber);
+                  whereQueryBuilder.Append(WifesLessThanOrEqualNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Age1LessThanOrEqualNumber);
+                  whereQueryBuilder.Append(" AND "+WifesLessThanOrEqualNumber);
              }
-             parameters.Add(new SqlParameter("@p21", filter.Age1LessThanOrEqualNumber));
+             parameters.Add(new SqlParameter("@p21", filter.WifesLessThanOrEqualNumber));
         }
-        if (filter.Agse1LessThanOrEqualNumber is not null)
+        if (filter.ImportanceLessThanOrEqualNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1LessThanOrEqualNumber);
+                  whereQueryBuilder.Append(ImportanceLessThanOrEqualNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1LessThanOrEqualNumber);
+                  whereQueryBuilder.Append(" AND "+ImportanceLessThanOrEqualNumber);
              }
-             parameters.Add(new SqlParameter("@p22", filter.Agse1LessThanOrEqualNumber));
+             parameters.Add(new SqlParameter("@p22", filter.ImportanceLessThanOrEqualNumber));
         }
-        if (filter.Agsse1LessThanOrEqualNumber is not null)
+        if (filter.NonImportanceLessThanOrEqualNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agsse1LessThanOrEqualNumber);
+                  whereQueryBuilder.Append(NonImportanceLessThanOrEqualNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agsse1LessThanOrEqualNumber);
+                  whereQueryBuilder.Append(" AND "+NonImportanceLessThanOrEqualNumber);
              }
-             parameters.Add(new SqlParameter("@p23", filter.Agsse1LessThanOrEqualNumber));
+             parameters.Add(new SqlParameter("@p23", filter.NonImportanceLessThanOrEqualNumber));
         }
         if (filter.IdLessThanNumber is not null)
         {
@@ -722,44 +722,44 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
              }
              parameters.Add(new SqlParameter("@p25", filter.AgeLessThanNumber));
         }
-        if (filter.Age1LessThanNumber is not null)
+        if (filter.WifesLessThanNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Age1LessThanNumber);
+                  whereQueryBuilder.Append(WifesLessThanNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Age1LessThanNumber);
+                  whereQueryBuilder.Append(" AND "+WifesLessThanNumber);
              }
-             parameters.Add(new SqlParameter("@p26", filter.Age1LessThanNumber));
+             parameters.Add(new SqlParameter("@p26", filter.WifesLessThanNumber));
         }
-        if (filter.Agse1LessThanNumber is not null)
+        if (filter.ImportanceLessThanNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1LessThanNumber);
+                  whereQueryBuilder.Append(ImportanceLessThanNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1LessThanNumber);
+                  whereQueryBuilder.Append(" AND "+ImportanceLessThanNumber);
              }
-             parameters.Add(new SqlParameter("@p27", filter.Agse1LessThanNumber));
+             parameters.Add(new SqlParameter("@p27", filter.ImportanceLessThanNumber));
         }
-        if (filter.Agsse1LessThanNumber is not null)
+        if (filter.NonImportanceLessThanNumber is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agsse1LessThanNumber);
+                  whereQueryBuilder.Append(NonImportanceLessThanNumber);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agsse1LessThanNumber);
+                  whereQueryBuilder.Append(" AND "+NonImportanceLessThanNumber);
              }
-             parameters.Add(new SqlParameter("@p28", filter.Agsse1LessThanNumber));
+             parameters.Add(new SqlParameter("@p28", filter.NonImportanceLessThanNumber));
         }
         if (filter.NameContains is not null)
         {
@@ -839,96 +839,96 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
              }
              parameters.Add(new SqlParameter("@p34", filter.AgeEquals));
         }
-        if (filter.Age1Equals is not null)
+        if (filter.WifesEquals is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Age1Equals);
+                  whereQueryBuilder.Append(WifesEquals);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Age1Equals);
+                  whereQueryBuilder.Append(" AND "+WifesEquals);
              }
-             parameters.Add(new SqlParameter("@p35", filter.Age1Equals));
+             parameters.Add(new SqlParameter("@p35", filter.WifesEquals));
         }
-        if (filter.Agde1Equals is not null)
+        if (filter.CharEquals is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agde1Equals);
+                  whereQueryBuilder.Append(CharEquals);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agde1Equals);
+                  whereQueryBuilder.Append(" AND "+CharEquals);
              }
-             parameters.Add(new SqlParameter("@p36", filter.Agde1Equals));
+             parameters.Add(new SqlParameter("@p36", filter.CharEquals));
         }
-        if (filter.coolEquals is not null)
+        if (filter.AliveEquals is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(coolEquals);
+                  whereQueryBuilder.Append(AliveEquals);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+coolEquals);
+                  whereQueryBuilder.Append(" AND "+AliveEquals);
              }
-             parameters.Add(new SqlParameter("@p37", filter.coolEquals));
+             parameters.Add(new SqlParameter("@p37", filter.AliveEquals));
         }
-        if (filter.Agse1Equals is not null)
+        if (filter.ImportanceEquals is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1Equals);
+                  whereQueryBuilder.Append(ImportanceEquals);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1Equals);
+                  whereQueryBuilder.Append(" AND "+ImportanceEquals);
              }
-             parameters.Add(new SqlParameter("@p38", filter.Agse1Equals));
+             parameters.Add(new SqlParameter("@p38", filter.ImportanceEquals));
         }
-        if (filter.Agsse1Equals is not null)
+        if (filter.NonImportanceEquals is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agsse1Equals);
+                  whereQueryBuilder.Append(NonImportanceEquals);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agsse1Equals);
+                  whereQueryBuilder.Append(" AND "+NonImportanceEquals);
              }
-             parameters.Add(new SqlParameter("@p39", filter.Agsse1Equals));
+             parameters.Add(new SqlParameter("@p39", filter.NonImportanceEquals));
         }
-        if (filter.Agse1fEquals is not null)
+        if (filter.YearEquals is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1fEquals);
+                  whereQueryBuilder.Append(YearEquals);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1fEquals);
+                  whereQueryBuilder.Append(" AND "+YearEquals);
              }
-             parameters.Add(new SqlParameter("@p40", filter.Agse1fEquals));
+             parameters.Add(new SqlParameter("@p40", filter.YearEquals));
         }
-        if (filter.BirthDateEquals is not null)
+        if (filter.DateOfBirthEquals is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(BirthDateEquals);
+                  whereQueryBuilder.Append(DateOfBirthEquals);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+BirthDateEquals);
+                  whereQueryBuilder.Append(" AND "+DateOfBirthEquals);
              }
-             parameters.Add(new SqlParameter("@p41", filter.BirthDateEquals));
+             parameters.Add(new SqlParameter("@p41", filter.DateOfBirthEquals));
         }
         if (filter.IdNotEqual is not null)
         {
@@ -969,96 +969,96 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
              }
              parameters.Add(new SqlParameter("@p44", filter.AgeNotEqual));
         }
-        if (filter.Age1NotEqual is not null)
+        if (filter.WifesNotEqual is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Age1NotEqual);
+                  whereQueryBuilder.Append(WifesNotEqual);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Age1NotEqual);
+                  whereQueryBuilder.Append(" AND "+WifesNotEqual);
              }
-             parameters.Add(new SqlParameter("@p45", filter.Age1NotEqual));
+             parameters.Add(new SqlParameter("@p45", filter.WifesNotEqual));
         }
-        if (filter.Agde1NotEqual is not null)
+        if (filter.CharNotEqual is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agde1NotEqual);
+                  whereQueryBuilder.Append(CharNotEqual);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agde1NotEqual);
+                  whereQueryBuilder.Append(" AND "+CharNotEqual);
              }
-             parameters.Add(new SqlParameter("@p46", filter.Agde1NotEqual));
+             parameters.Add(new SqlParameter("@p46", filter.CharNotEqual));
         }
-        if (filter.coolNotEqual is not null)
+        if (filter.AliveNotEqual is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(coolNotEqual);
+                  whereQueryBuilder.Append(AliveNotEqual);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+coolNotEqual);
+                  whereQueryBuilder.Append(" AND "+AliveNotEqual);
              }
-             parameters.Add(new SqlParameter("@p47", filter.coolNotEqual));
+             parameters.Add(new SqlParameter("@p47", filter.AliveNotEqual));
         }
-        if (filter.Agse1NotEqual is not null)
+        if (filter.ImportanceNotEqual is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1NotEqual);
+                  whereQueryBuilder.Append(ImportanceNotEqual);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1NotEqual);
+                  whereQueryBuilder.Append(" AND "+ImportanceNotEqual);
              }
-             parameters.Add(new SqlParameter("@p48", filter.Agse1NotEqual));
+             parameters.Add(new SqlParameter("@p48", filter.ImportanceNotEqual));
         }
-        if (filter.Agsse1NotEqual is not null)
+        if (filter.NonImportanceNotEqual is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agsse1NotEqual);
+                  whereQueryBuilder.Append(NonImportanceNotEqual);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agsse1NotEqual);
+                  whereQueryBuilder.Append(" AND "+NonImportanceNotEqual);
              }
-             parameters.Add(new SqlParameter("@p49", filter.Agsse1NotEqual));
+             parameters.Add(new SqlParameter("@p49", filter.NonImportanceNotEqual));
         }
-        if (filter.Agse1fNotEqual is not null)
+        if (filter.YearNotEqual is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(Agse1fNotEqual);
+                  whereQueryBuilder.Append(YearNotEqual);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+Agse1fNotEqual);
+                  whereQueryBuilder.Append(" AND "+YearNotEqual);
              }
-             parameters.Add(new SqlParameter("@p50", filter.Agse1fNotEqual));
+             parameters.Add(new SqlParameter("@p50", filter.YearNotEqual));
         }
-        if (filter.BirthDateNotEqual is not null)
+        if (filter.DateOfBirthNotEqual is not null)
         {
              if(isFirstWhere)
              {
-                  whereQueryBuilder.Append(BirthDateNotEqual);
+                  whereQueryBuilder.Append(DateOfBirthNotEqual);
                   isFirstWhere = false;
              }
              else
              {
-                  whereQueryBuilder.Append(" AND "+BirthDateNotEqual);
+                  whereQueryBuilder.Append(" AND "+DateOfBirthNotEqual);
              }
-             parameters.Add(new SqlParameter("@p51", filter.BirthDateNotEqual));
+             parameters.Add(new SqlParameter("@p51", filter.DateOfBirthNotEqual));
         }
         
        
@@ -1069,13 +1069,13 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
     private static readonly string Id = "[Id]";
     private static readonly string Name = "[Name]";
     private static readonly string Age = "[Age]";
-    private static readonly string Age1 = "[Age1]";
-    private static readonly string Agde1 = "[Agde1]";
-    private static readonly string cool = "[cool]";
-    private static readonly string Agse1 = "[Agse1]";
-    private static readonly string Agsse1 = "[Agsse1]";
-    private static readonly string Agse1f = "[Agse1f]";
-    private static readonly string BirthDate = "[BirthDate]";
+    private static readonly string Wifes = "[Wifes]";
+    private static readonly string Char = "[Char]";
+    private static readonly string Alive = "[Alive]";
+    private static readonly string Importance = "[Importance]";
+    private static readonly string NonImportance = "[NonImportance]";
+    private static readonly string Year = "[Year]";
+    private static readonly string DateOfBirth = "[DateOfBirth]";
 
     private static readonly string OrderByIdAscending = "[Id] ASC";
     private static readonly string OrderByIdDescending = "[Id] DESC";
@@ -1083,72 +1083,72 @@ public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
     private static readonly string OrderByNameDescending = "[Name] DESC";
     private static readonly string OrderByAgeAscending = "[Age] ASC";
     private static readonly string OrderByAgeDescending = "[Age] DESC";
-    private static readonly string OrderByAge1Ascending = "[Age1] ASC";
-    private static readonly string OrderByAge1Descending = "[Age1] DESC";
-    private static readonly string OrderByAgde1Ascending = "[Agde1] ASC";
-    private static readonly string OrderByAgde1Descending = "[Agde1] DESC";
-    private static readonly string OrderBycoolAscending = "[cool] ASC";
-    private static readonly string OrderBycoolDescending = "[cool] DESC";
-    private static readonly string OrderByAgse1Ascending = "[Agse1] ASC";
-    private static readonly string OrderByAgse1Descending = "[Agse1] DESC";
-    private static readonly string OrderByAgsse1Ascending = "[Agsse1] ASC";
-    private static readonly string OrderByAgsse1Descending = "[Agsse1] DESC";
-    private static readonly string OrderByAgse1fAscending = "[Agse1f] ASC";
-    private static readonly string OrderByAgse1fDescending = "[Agse1f] DESC";
-    private static readonly string OrderByBirthDateAscending = "[BirthDate] ASC";
-    private static readonly string OrderByBirthDateDescending = "[BirthDate] DESC";
+    private static readonly string OrderByWifesAscending = "[Wifes] ASC";
+    private static readonly string OrderByWifesDescending = "[Wifes] DESC";
+    private static readonly string OrderByCharAscending = "[Char] ASC";
+    private static readonly string OrderByCharDescending = "[Char] DESC";
+    private static readonly string OrderByAliveAscending = "[Alive] ASC";
+    private static readonly string OrderByAliveDescending = "[Alive] DESC";
+    private static readonly string OrderByImportanceAscending = "[Importance] ASC";
+    private static readonly string OrderByImportanceDescending = "[Importance] DESC";
+    private static readonly string OrderByNonImportanceAscending = "[NonImportance] ASC";
+    private static readonly string OrderByNonImportanceDescending = "[NonImportance] DESC";
+    private static readonly string OrderByYearAscending = "[Year] ASC";
+    private static readonly string OrderByYearDescending = "[Year] DESC";
+    private static readonly string OrderByDateOfBirthAscending = "[DateOfBirth] ASC";
+    private static readonly string OrderByDateOfBirthDescending = "[DateOfBirth] DESC";
 
 
-    private static readonly string Agse1fBiggerThanOrEqualDate = "[Agse1f] >= CAST(@p1 AS DATE)";
-    private static readonly string BirthDateBiggerThanOrEqualDate = "[BirthDate] >= CAST(@p2 AS DATE)";
-    private static readonly string Agse1fBiggerThanDate = "[Agse1f] > CAST(@p3 AS DATE)";
-    private static readonly string BirthDateBiggerThanDate = "[BirthDate] > CAST(@p4 AS DATE)";
-    private static readonly string Agse1fLessThanOrEqualDate = "[Agse1f] <= CAST(@p5 AS DATE)";
-    private static readonly string BirthDateLessThanOrEqualDate = "[BirthDate] <= CAST(@p6 AS DATE)";
-    private static readonly string Agse1fLessThanDate = "[Agse1f] < CAST(@p7 AS DATE)";
-    private static readonly string BirthDateLessThanDate = "[BirthDate] < CAST(@p8 AS DATE)";
+    private static readonly string YearBiggerThanOrEqualDate = "[Year] >= CAST(@p1 AS DATE)";
+    private static readonly string DateOfBirthBiggerThanOrEqualDate = "[DateOfBirth] >= CAST(@p2 AS DATE)";
+    private static readonly string YearBiggerThanDate = "[Year] > CAST(@p3 AS DATE)";
+    private static readonly string DateOfBirthBiggerThanDate = "[DateOfBirth] > CAST(@p4 AS DATE)";
+    private static readonly string YearLessThanOrEqualDate = "[Year] <= CAST(@p5 AS DATE)";
+    private static readonly string DateOfBirthLessThanOrEqualDate = "[DateOfBirth] <= CAST(@p6 AS DATE)";
+    private static readonly string YearLessThanDate = "[Year] < CAST(@p7 AS DATE)";
+    private static readonly string DateOfBirthLessThanDate = "[DateOfBirth] < CAST(@p8 AS DATE)";
     private static readonly string IdBiggerThanOrEqualNumber = "[Id] >= @p9";
     private static readonly string AgeBiggerThanOrEqualNumber = "[Age] >= @p10";
-    private static readonly string Age1BiggerThanOrEqualNumber = "[Age1] >= @p11";
-    private static readonly string Agse1BiggerThanOrEqualNumber = "[Agse1] >= @p12";
-    private static readonly string Agsse1BiggerThanOrEqualNumber = "[Agsse1] >= @p13";
+    private static readonly string WifesBiggerThanOrEqualNumber = "[Wifes] >= @p11";
+    private static readonly string ImportanceBiggerThanOrEqualNumber = "[Importance] >= @p12";
+    private static readonly string NonImportanceBiggerThanOrEqualNumber = "[NonImportance] >= @p13";
     private static readonly string IdBiggerThanNumber = "[Id] > @p14";
     private static readonly string AgeBiggerThanNumber = "[Age] > @p15";
-    private static readonly string Age1BiggerThanNumber = "[Age1] > @p16";
-    private static readonly string Agse1BiggerThanNumber = "[Agse1] > @p17";
-    private static readonly string Agsse1BiggerThanNumber = "[Agsse1] > @p18";
+    private static readonly string WifesBiggerThanNumber = "[Wifes] > @p16";
+    private static readonly string ImportanceBiggerThanNumber = "[Importance] > @p17";
+    private static readonly string NonImportanceBiggerThanNumber = "[NonImportance] > @p18";
     private static readonly string IdLessThanOrEqualNumber = "[Id] <= @p19";
     private static readonly string AgeLessThanOrEqualNumber = "[Age] <= @p20";
-    private static readonly string Age1LessThanOrEqualNumber = "[Age1] <= @p21";
-    private static readonly string Agse1LessThanOrEqualNumber = "[Agse1] <= @p22";
-    private static readonly string Agsse1LessThanOrEqualNumber = "[Agsse1] <= @p23";
+    private static readonly string WifesLessThanOrEqualNumber = "[Wifes] <= @p21";
+    private static readonly string ImportanceLessThanOrEqualNumber = "[Importance] <= @p22";
+    private static readonly string NonImportanceLessThanOrEqualNumber = "[NonImportance] <= @p23";
     private static readonly string IdLessThanNumber = "[Id] < @p24";
     private static readonly string AgeLessThanNumber = "[Age] < @p25";
-    private static readonly string Age1LessThanNumber = "[Age1] < @p26";
-    private static readonly string Agse1LessThanNumber = "[Agse1] < @p27";
-    private static readonly string Agsse1LessThanNumber = "[Agsse1] < @p28";
+    private static readonly string WifesLessThanNumber = "[Wifes] < @p26";
+    private static readonly string ImportanceLessThanNumber = "[Importance] < @p27";
+    private static readonly string NonImportanceLessThanNumber = "[NonImportance] < @p28";
     private static readonly string NameContains = "[Name] LIKE '%' + @p29 + '%'";
     private static readonly string NameStartsWith = "[Name] LIKE @p30 + '%'";
     private static readonly string NameEndsWith = "[Name] LIKE '%' + @p31";
     private static readonly string IdEquals = "[Id] = @p32";
     private static readonly string NameEquals = "[Name] = @p33";
     private static readonly string AgeEquals = "[Age] = @p34";
-    private static readonly string Age1Equals = "[Age1] = @p35";
-    private static readonly string Agde1Equals = "[Agde1] = @p36";
-    private static readonly string coolEquals = "[cool] = @p37";
-    private static readonly string Agse1Equals = "[Agse1] = @p38";
-    private static readonly string Agsse1Equals = "[Agsse1] = @p39";
-    private static readonly string Agse1fEquals = "[Agse1f] = @p40";
-    private static readonly string BirthDateEquals = "[BirthDate] = @p41";
+    private static readonly string WifesEquals = "[Wifes] = @p35";
+    private static readonly string CharEquals = "[Char] = @p36";
+    private static readonly string AliveEquals = "[Alive] = @p37";
+    private static readonly string ImportanceEquals = "[Importance] = @p38";
+    private static readonly string NonImportanceEquals = "[NonImportance] = @p39";
+    private static readonly string YearEquals = "[Year] = @p40";
+    private static readonly string DateOfBirthEquals = "[DateOfBirth] = @p41";
     private static readonly string IdNotEqual = "[Id] <> @p42";
     private static readonly string NameNotEqual = "[Name] <> @p43";
     private static readonly string AgeNotEqual = "[Age] <> @p44";
-    private static readonly string Age1NotEqual = "[Age1] <> @p45";
-    private static readonly string Agde1NotEqual = "[Agde1] <> @p46";
-    private static readonly string coolNotEqual = "[cool] <> @p47";
-    private static readonly string Agse1NotEqual = "[Agse1] <> @p48";
-    private static readonly string Agsse1NotEqual = "[Agsse1] <> @p49";
-    private static readonly string Agse1fNotEqual = "[Agse1f] <> @p50";
-    private static readonly string BirthDateNotEqual = "[BirthDate] <> @p51";
+    private static readonly string WifesNotEqual = "[Wifes] <> @p45";
+    private static readonly string CharNotEqual = "[Char] <> @p46";
+    private static readonly string AliveNotEqual = "[Alive] <> @p47";
+    private static readonly string ImportanceNotEqual = "[Importance] <> @p48";
+    private static readonly string NonImportanceNotEqual = "[NonImportance] <> @p49";
+    private static readonly string YearNotEqual = "[Year] <> @p50";
+    private static readonly string DateOfBirthNotEqual = "[DateOfBirth] <> @p51";
 
 }
