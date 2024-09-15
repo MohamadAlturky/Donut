@@ -1,10 +1,8 @@
-using Donut.Core.Filter;
+using Donut.SharedKernel.DatabaseConnection;
 using Donut.SharedKernel.Repositories;
 using Donut.SharedKernel.Tabels;
 using System.Data;
 using Dapper;
-using Donut.SharedKernel.DatabaseConnection;
-using Donut.Core.Pagination;
 
 namespace Donut.Repositories;
 public interface IPersonRepository: IRepository<Person>
@@ -55,13 +53,13 @@ public class PersonRepository: IPersonRepository
     {
          using (var connection = _factory.CreateConnection())
          {
-           var sql = "DELETE FROM Person WHERE Id = @Id;";
-           await connection.ExecuteAsync(sql, entity);
+            var sql = "DELETE FROM Person WHERE Id = @Id;";
+            await connection.ExecuteAsync(sql, entity);
          }
     }
     public async Task DeleteTransactional(Person entity, IDbConnection connection, IDbTransaction transaction)
     {
-           var sql = "DELETE FROM Person WHERE Id = @Id;";
-        await connection.ExecuteAsync(sql, entity, transaction);
+         var sql = "DELETE FROM Person WHERE Id = @Id;";
+         await connection.ExecuteAsync(sql, entity, transaction);
     }
 }

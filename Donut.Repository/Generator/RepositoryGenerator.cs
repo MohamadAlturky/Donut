@@ -12,15 +12,14 @@ public class RepositoryGenerator
         string className = inputType.Name + "Repository";
         string namespaceName = "Donut.Repositories";
 
-        classBuilder.AppendLine($"using Donut.Core.Filter;");
         classBuilder.AppendLine($"""
+            using Donut.SharedKernel.DatabaseConnection;
             using Donut.SharedKernel.Repositories;
             using Donut.SharedKernel.Tabels;
             using System.Data;
             using Dapper;
-            using Donut.SharedKernel.DatabaseConnection;
             """);
-        classBuilder.AppendLine($"using Donut.Core.Pagination;\n");
+        classBuilder.AppendLine($"");
         classBuilder.AppendLine($"namespace {namespaceName};");
         classBuilder.AppendLine($"public interface I{className}: IRepository<{inputType.Name}>");
         classBuilder.AppendLine($"{{");
@@ -54,15 +53,15 @@ public class RepositoryGenerator
         classBuilder.AppendLine("    {");
         classBuilder.AppendLine("         using (var connection = _factory.CreateConnection())");
         classBuilder.AppendLine("         {");
-        classBuilder.AppendLine($"           var sql = \"DELETE FROM {inputType.Name} WHERE Id = @Id;\";");
-        classBuilder.AppendLine("           await connection.ExecuteAsync(sql, entity);");
+        classBuilder.AppendLine($"            var sql = \"DELETE FROM {inputType.Name} WHERE Id = @Id;\";");
+        classBuilder.AppendLine("            await connection.ExecuteAsync(sql, entity);");
         classBuilder.AppendLine("         }");
         classBuilder.AppendLine("    }");
 
         classBuilder.AppendLine($"    public async Task DeleteTransactional({inputType.Name} entity, IDbConnection connection, IDbTransaction transaction)");
         classBuilder.AppendLine("    {");
-        classBuilder.AppendLine($"           var sql = \"DELETE FROM {inputType.Name} WHERE Id = @Id;\";");
-        classBuilder.AppendLine("        await connection.ExecuteAsync(sql, entity, transaction);");
+        classBuilder.AppendLine($"         var sql = \"DELETE FROM {inputType.Name} WHERE Id = @Id;\";");
+        classBuilder.AppendLine("         await connection.ExecuteAsync(sql, entity, transaction);");
         classBuilder.AppendLine("    }");
     }
 
