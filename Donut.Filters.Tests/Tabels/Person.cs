@@ -16,9 +16,4 @@ namespace Donut.SharedKernel.Tabels
         public DateTime DateOfBirth { get; set; }
     }
 }
-namespace Donut.SharedKernel.SQL
-{
-    public interface ITabel
-    {
-    }
-}
+

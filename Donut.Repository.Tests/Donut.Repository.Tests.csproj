@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Donut.Filters.Tests\Donut.Filters.Tests.csproj" />
     <ProjectReference Include="..\Donut.Filters\Donut.Filters.csproj" />
     <ProjectReference Include="..\Donut.Repository\Donut.Repository.csproj" />
   </ItemGroup>

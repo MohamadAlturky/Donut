@@ -8,11 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Donut.Core\Donut.Core.csproj" />
-    <ProjectReference Include="..\Donut.Filters.Execution\Donut.Filters.Execution.csproj" />
-    <ProjectReference Include="..\Donut.Filters.Tests\Donut.Filters.Tests.csproj" />
+    <ProjectReference Include="..\Donut.Application\Donut.Application.csproj" />
+    <ProjectReference Include="..\Donut.Filters.Execution.Tests\Donut.Filters.Execution.Tests.csproj" />
     <ProjectReference Include="..\Donut.Filters\Donut.Filters.csproj" />
-    <ProjectReference Include="..\Donut.QueryBuilding\Donut.QueryBuilding.csproj" />
+    <ProjectReference Include="..\Donut.Repository.Tests\Donut.Repository.Tests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Generated\" />
   </ItemGroup>
 
 </Project>

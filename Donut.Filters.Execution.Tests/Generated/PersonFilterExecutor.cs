@@ -6,9 +6,15 @@ using Donut.QueryBuilding.Builder;
 using Microsoft.Data.SqlClient;
 using System.Text;
 using Donut.Core.Pagination;
+using Donut.SharedKernel.Tabels;
 
 namespace Donut.Filters.Execution;
-public class PersonFilterExecutor: IFilterExecutor<Person,PersonFilter>
+public interface IPersonFilterExecutor : IFilterExecutor<Person, PersonFilter>
+{
+
+}
+
+public class PersonFilterExecutor: IPersonFilterExecutor
 {
     private readonly QueryExecutor _executor;
 
