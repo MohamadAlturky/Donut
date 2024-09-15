@@ -1,4 +1,4 @@
-﻿using Donut.SharedKernel.SQL;
+﻿using Donut.Core.Tabels;
 
 namespace Donut.SharedKernel.Tabels
 {

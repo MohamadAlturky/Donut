@@ -4,8 +4,8 @@ using Donut.SharedKernel.Tabels;
 using System.Data;
 using Donut.Core.CQRS;
 using Dapper;
-using Donut.SharedKernel.Results;
 using Donut.Repositories;
+using Donut.Core.Results;
 
 namespace Donut.CQRS;
 public record AddPersonCommand: ICommand<Person>

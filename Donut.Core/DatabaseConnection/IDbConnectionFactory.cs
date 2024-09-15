@@ -1,10 +1,9 @@
 ﻿using System.Data;
 
-namespace Donut.SharedKernel.DatabaseConnection
-{
+namespace Donut.Core.DatabaseConnection;
 
-    public interface IDbConnectionFactory
-    {
-        IDbConnection CreateConnection();
-    }
+
+public interface IDbConnectionFactory
+{
+    IDbConnection CreateConnection();
 }

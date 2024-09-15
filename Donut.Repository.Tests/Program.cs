@@ -1,6 +1,6 @@
-﻿using Donut.Filters.Files;
+﻿using Donut.Core.Tabels;
+using Donut.Filters.Files;
 using Donut.Repository.Generator;
-using Donut.SharedKernel.SQL;
 using Donut.SharedKernel.Tabels;
 using Donut.SharedKernel.TableSpecifications.Scanner;
 

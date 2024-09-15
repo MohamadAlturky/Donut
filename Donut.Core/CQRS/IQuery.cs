@@ -1,4 +1,4 @@
-﻿using Donut.SharedKernel.Results;
+﻿using Donut.Core.Results;
 using MediatR;
 namespace Donut.Core.CQRS;
 

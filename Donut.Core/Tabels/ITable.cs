@@ -1,6 +1,5 @@
-﻿namespace Donut.SharedKernel.SQL
+﻿namespace Donut.Core.Tabels;
+
+public interface ITabel
 {
-    public interface ITabel
-    {
-    }
 }

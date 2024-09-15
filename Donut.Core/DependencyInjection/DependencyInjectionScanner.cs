@@ -1,10 +1,9 @@
-﻿using Donut.SharedKernel.DependencyInjection.Installer;
-using Donut.SharedKernel.Utilities;
+﻿using Donut.Core.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Donut.SharedKernel.DependencyInjection.Scanner;
+namespace Donut.Core.DependencyInjection;
 
 public static class DependencyInjectionScanner
 {

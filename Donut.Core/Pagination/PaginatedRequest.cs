@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Donut.Core.Pagination
+namespace Donut.Core.Pagination;
+
+public class PaginatedRequest
 {
-    public class PaginatedRequest
-    {
-        public int PageSize { get; set; }
-        public int PageNumber { get; set; }
-    }
+    public int PageSize { get; set; }
+    public int PageNumber { get; set; }
 }

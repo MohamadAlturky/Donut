@@ -1,4 +1,4 @@
-﻿namespace Donut.SharedKernel.Results;
+﻿namespace Donut.Core.Results;
 
 public class Error
 {

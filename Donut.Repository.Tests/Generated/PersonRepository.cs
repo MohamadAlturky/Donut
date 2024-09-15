@@ -1,8 +1,8 @@
-using Donut.SharedKernel.DatabaseConnection;
-using Donut.SharedKernel.Repositories;
 using Donut.SharedKernel.Tabels;
 using System.Data;
 using Dapper;
+using Donut.Core.DatabaseConnection;
+using Donut.Core.Repositories;
 
 namespace Donut.Repositories;
 public interface IPersonRepository: IRepository<Person>

@@ -1,4 +1,4 @@
-﻿namespace Donut.SharedKernel.Results;
+﻿namespace Donut.Core.Results;
 
 public class Result
 {
@@ -40,11 +40,11 @@ public class Result
     {
         if (value != null)
         {
-            return Result.Success(value);
+            return Success(value);
         }
         else
         {
-            return Result.Failure<T>(Error.Null);
+            return Failure<T>(Error.Null);
         }
     }
 }

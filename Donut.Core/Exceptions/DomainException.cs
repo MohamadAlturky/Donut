@@ -1,4 +1,4 @@
-﻿namespace Donut.SharedKernel.Exceptions;
+﻿namespace Donut.Core.Exceptions;
 
 public class DomainException : Exception
 {

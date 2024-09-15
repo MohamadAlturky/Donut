@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Donut.SharedKernel.Results;
+using Donut.Core.Results;
 
 namespace Donut.Core.CQRS;
 

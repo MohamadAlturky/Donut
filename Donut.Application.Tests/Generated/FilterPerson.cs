@@ -3,7 +3,7 @@ using Donut.Core.CQRS;
 using Donut.Core.Pagination;
 using Donut.Filters.Execution;
 using Donut.Filters;
-using Donut.SharedKernel.Results;
+using Donut.Core.Results;
 
 namespace Donut.CQRS;
 public record FilterPersonQuery: IQuery<PaginatedResponse<Person>>

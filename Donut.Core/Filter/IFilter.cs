@@ -1,10 +1,9 @@
 ﻿using Donut.Core.Pagination;
 
-namespace Donut.Core.Filter
+namespace Donut.Core.Filter;
+
+public interface IFilter
 {
-    public interface IFilter
-    {
-        PaginatedRequest PaginatedRequest { get; set; }
-        bool EagerLoading { get; set; }
-    }
+    PaginatedRequest PaginatedRequest { get; set; }
+    bool EagerLoading { get; set; }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Donut.SharedKernel.DependencyInjection.Installer;
+namespace Donut.Core.DependencyInjection;
 
 public interface IDependencyInjectionInstaller
 {

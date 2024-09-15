@@ -1,8 +1,6 @@
-﻿
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 
-namespace Donut.SharedKernel.Utilities;
+namespace Donut.Core.Utilities;
 
 public static class TypeChecker
 {

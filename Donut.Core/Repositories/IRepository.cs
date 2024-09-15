@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Donut.SharedKernel.Repositories;
+namespace Donut.Core.Repositories;
 
 public interface IRepository<T>
 {
