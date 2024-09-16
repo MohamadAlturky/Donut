@@ -16,16 +16,21 @@ public class FilterExecutionGenerator
         string entityName = RemoveFilterSuffix(inputType.Name);
         string namespaceName = "Donut.Filters.Execution";
 
-        classBuilder.AppendLine($"using Donut.Core.Filter;");
-        classBuilder.AppendLine($"using Donut.QueryBuilding.Enum;");
-        classBuilder.AppendLine($"using Donut.QueryBuilding.Utils;");
-        classBuilder.AppendLine($"using Donut.QueryBuilding.Execution;");
-        classBuilder.AppendLine($"using Donut.QueryBuilding.Builder;");
-        classBuilder.AppendLine($"using Microsoft.Data.SqlClient;");
-        classBuilder.AppendLine($"using System.Text;");
-        classBuilder.AppendLine($"using Donut.Core.Pagination;\n");
+        classBuilder.AppendLine("""
+                using Donut.Core.Filter;
+                using Donut.QueryBuilding.Execution;
+                using Microsoft.Data.SqlClient;
+                using System.Text;
+                using Donut.Core.Pagination;
+                using Donut.Core.Tabels;
+                """);
+      
         classBuilder.AppendLine($"namespace {namespaceName};");
-        classBuilder.AppendLine($"public class {className}: IFilterExecutor<{entityName},{inputType.Name}>");
+        classBuilder.AppendLine($"public interface I{className}: IFilterExecutor<{entityName},{inputType.Name}>");
+        classBuilder.AppendLine("{");
+        classBuilder.AppendLine("}");
+
+        classBuilder.AppendLine($"public class {className}: I{className}");
         classBuilder.AppendLine("{");
         var privateMembers = """
                 private readonly QueryExecutor _executor;

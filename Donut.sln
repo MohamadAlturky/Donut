@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donut.Generation.Core", "Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Donut.Generation.Tests", "Donut.Generation.Tests\Donut.Generation.Tests.csproj", "{BB1D5FA4-315B-44F8-893F-D890EE969423}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Donut.Generation.Performance", "Donut.Generation.Performance\Donut.Generation.Performance.csproj", "{15899676-E48A-41DA-A707-99AF1CA38EB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{BB1D5FA4-315B-44F8-893F-D890EE969423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB1D5FA4-315B-44F8-893F-D890EE969423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB1D5FA4-315B-44F8-893F-D890EE969423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15899676-E48A-41DA-A707-99AF1CA38EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15899676-E48A-41DA-A707-99AF1CA38EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15899676-E48A-41DA-A707-99AF1CA38EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15899676-E48A-41DA-A707-99AF1CA38EB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{6C8B6CDA-42AA-4DBD-BAF2-D8EF8F2C80CD} = {9CCB26FC-57FD-4C19-A823-8E627C58A1FA}
 		{8CF7A95D-05D4-477F-A92C-3BACFF6F3A0A} = {E236C919-C466-42A8-9F24-B1A785D2E4EA}
 		{BB1D5FA4-315B-44F8-893F-D890EE969423} = {E236C919-C466-42A8-9F24-B1A785D2E4EA}
+		{15899676-E48A-41DA-A707-99AF1CA38EB2} = {E236C919-C466-42A8-9F24-B1A785D2E4EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E9F7BF3-B3C3-47DE-ACFF-9667C9B50B41}

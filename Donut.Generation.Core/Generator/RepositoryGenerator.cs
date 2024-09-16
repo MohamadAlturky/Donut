@@ -13,11 +13,11 @@ public class RepositoryGenerator
         string namespaceName = "Donut.Repositories";
 
         classBuilder.AppendLine($"""
-            using Donut.SharedKernel.DatabaseConnection;
-            using Donut.SharedKernel.Repositories;
-            using Donut.SharedKernel.Tabels;
             using System.Data;
             using Dapper;
+            using Donut.Core.DatabaseConnection;
+            using Donut.Core.Repositories;
+            using Donut.Core.Tabels;
             """);
         classBuilder.AppendLine($"");
         classBuilder.AppendLine($"namespace {namespaceName};");

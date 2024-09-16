@@ -12,14 +12,10 @@ public class CQRSGenerator
         string namespaceName = "Donut.CQRS";
 
         classBuilder.AppendLine($"""
-            using Donut.SharedKernel.DatabaseConnection;
-            using Donut.SharedKernel.Repositories;
-            using Donut.SharedKernel.Tabels;
-            using System.Data;
             using Donut.Core.CQRS;
-            using Dapper;
-            using Donut.SharedKernel.Results;
             using Donut.Repositories;
+            using Donut.Core.Tabels;
+            using Donut.Core.Results;
             """);
         classBuilder.AppendLine($"");
         classBuilder.AppendLine($"namespace {namespaceName};");
@@ -62,14 +58,11 @@ public class CQRSGenerator
         string namespaceName = "Donut.CQRS";
 
         classBuilder.AppendLine($"""
-            using Donut.SharedKernel.DatabaseConnection;
-            using Donut.SharedKernel.Repositories;
-            using Donut.SharedKernel.Tabels;
-            using System.Data;
             using Donut.Core.CQRS;
-            using Dapper;
-            using Donut.SharedKernel.Results;
+            using Donut.Core.Results;
+            using Donut.Core.Tabels;
             using Donut.Repositories;
+            
             """);
         classBuilder.AppendLine($"");
         classBuilder.AppendLine($"namespace {namespaceName};");
@@ -113,12 +106,12 @@ public class CQRSGenerator
         string namespaceName = "Donut.CQRS";
 
         classBuilder.AppendLine($"""
-            using Donut.SharedKernel.Tabels;
             using Donut.Core.CQRS;
             using Donut.Core.Pagination;
-            using Donut.Filters.Execution;
             using Donut.Filters;
-            using Donut.SharedKernel.Results;
+            using Donut.Core.Tabels;
+            using Donut.Filters.Execution;
+            using Donut.Core.Results;
             """);
         classBuilder.AppendLine($"");
         classBuilder.AppendLine($"namespace {namespaceName};");

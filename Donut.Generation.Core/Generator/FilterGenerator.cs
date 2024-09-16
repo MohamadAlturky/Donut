@@ -19,7 +19,8 @@ public class FilterGenerator
         classBuilder.AppendLine("{");
         classBuilder.AppendLine($"    // For Every Filter");
         classBuilder.AppendLine($"    public PaginatedRequest PaginatedRequest {{ get; set; }}");
-        classBuilder.AppendLine($"    public bool EagerLoading {{ get; set; }} = true;\n");
+        classBuilder.AppendLine($"    public bool EagerLoading {{ get; set; }} = true;");
+        classBuilder.AppendLine($"    ");
 
         PropertyInfo[] properties = inputType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
@@ -63,7 +64,7 @@ public class FilterGenerator
             classBuilder.AppendLine($"    public {typeName} {property.Name}LessThanOrEqualDate {{ get; set; }}");
             classBuilder.AppendLine($"    public {typeName} {property.Name}BiggerThanOrEqualDate {{ get; set; }}");
         }
-        classBuilder.AppendLine($"\n");
+        classBuilder.AppendLine($"    ");
     }
 
     private static string GetNullableTypeName(PropertyInfo property)
