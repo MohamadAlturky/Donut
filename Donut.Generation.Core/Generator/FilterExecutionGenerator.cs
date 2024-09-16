@@ -234,7 +234,7 @@ public class FilterExecutionGenerator
 
         return input;
     }
-    private static string RemovePrefix(string input, string prefix)
+    public static string RemovePrefix(string input, string prefix)
     {
         if (string.IsNullOrEmpty(input) || string.IsNullOrEmpty(prefix))
         {
@@ -249,7 +249,7 @@ public class FilterExecutionGenerator
         return input;
     }
 
-    private static string RemoveSuffix(string input, string suffix)
+    public static string RemoveSuffix(string input, string suffix)
     {
 
         if (string.IsNullOrEmpty(input))
@@ -264,7 +264,7 @@ public class FilterExecutionGenerator
 
         return input;
     }
-    private static (string, string) ParseOrderByString(string input)
+    public static (string, string) ParseOrderByString(string input)
     {
         if (string.IsNullOrEmpty(input))
         {
