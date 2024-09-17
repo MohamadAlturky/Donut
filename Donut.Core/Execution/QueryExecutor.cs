@@ -28,8 +28,8 @@ public class QueryExecutor
             {(string.IsNullOrEmpty(orderByClause) ? "" : "ORDER BY " + orderByClause)} 
             OFFSET @Offset ROWS
             FETCH NEXT @PageSize ROWS ONLY;";
-        Console.WriteLine(countQuery);
-        Console.WriteLine(dataQuery);
+        //Console.WriteLine(countQuery);
+        //Console.WriteLine(dataQuery);
 
         //using (var connection = _factory.CreateConnection())
         //{

@@ -42,6 +42,16 @@ while (true)
             fileWriter.CreateFile($"{projectDirectory}/{type.Name}/Delete{type.Name}.cs");
             fileWriter.WriteToFile(content, $"{projectDirectory}/{type.Name}/Delete{type.Name}.cs");
 
+            content = DTOGenerator.Generate(type);
+            fileWriter = new();
+            fileWriter.CreateFile($"{projectDirectory}/{type.Name}/{type.Name}DTO.cs");
+            fileWriter.WriteToFile(content, $"{projectDirectory}/{type.Name}/{type.Name}DTO.cs");
+
+            content = DTOGenerator.GenerateRequest(type, "Create", "Request");
+            fileWriter = new();
+            fileWriter.CreateFile($"{projectDirectory}/{type.Name}/Create{type.Name}Request.cs");
+            fileWriter.WriteToFile(content, $"{projectDirectory}/{type.Name}/Create{type.Name}Request.cs");
+
         }
     }
     if (key == "1")
@@ -69,14 +79,26 @@ while (true)
             FileWriter fileWriter = new();
             string projectDirectory = "C:\\Users\\hp\\source\\repos\\Donut\\Donut.Generation.Tests";
 
-            content = CQRSGenerator.GenerateFilterQuery(type,"Filter");
+            content = CQRSGenerator.GenerateFilterQuery(type,"");
             fileWriter = new();
-            fileWriter.CreateFile($"{projectDirectory}/{type.Name}/{type.Name}FilterQuery.cs");
-            fileWriter.WriteToFile(content, $"{projectDirectory}/{type.Name}/{type.Name}FilterQuery.cs");
+            fileWriter.CreateFile($"{projectDirectory}/{type.Name}/{type.Name}Query.cs");
+            fileWriter.WriteToFile(content, $"{projectDirectory}/{type.Name}/{type.Name}Query.cs");
         }
     }
     if (key == "3")
     {
+        foreach (var type in types)
+        {
+            
+            var content = "";
+            FileWriter fileWriter = new();
+            string projectDirectory = "C:\\Users\\hp\\source\\repos\\Donut\\Donut.Generation.Tests";
+
+            content = APIGenerator.GenerateCreate(type,"Add");
+            fileWriter = new();
+            fileWriter.CreateFile($"{projectDirectory}/{type.Name}/Create{type.Name}Endpoint.cs");
+            fileWriter.WriteToFile(content, $"{projectDirectory}/{type.Name}/Create{type.Name}Endpoint.cs");
+        }
         break;
     }
 }

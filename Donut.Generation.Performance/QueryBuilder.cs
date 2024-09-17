@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using Donut.Filters.Execution;
 using Donut.Generation.Core.Generator;
 using Donut.Generation.Core.Grouping;
 using System.Reflection;
@@ -9,6 +10,19 @@ namespace Donut.Generation.Performance;
 [MemoryDiagnoser]
 public class QueryBuilder
 {
+   // private readonly
+   //     PersonFilterExecutor f = new PersonFilterExecutor(new QueryBuilding.Execution.QueryExecutor());
+   // private readonly Filters.PersonFilter x = new Filters.PersonFilter()
+   // {
+   //     OrderByIdAscending = true,
+   //     SelectId = true,
+   // };
+
+   // [GlobalSetup]
+   //public void Set()
+   // {
+
+   // }
     public static string Build<T>(T filter)
     {
         var selectList = new List<string>();
@@ -129,4 +143,11 @@ public class QueryBuilder
         });
         return sql;
     }
+
+    //[Benchmark]
+    //public string SMTH()
+    //{
+    //    var sql = f.Execute(x);
+    //    return "sql";
+    //}
 }

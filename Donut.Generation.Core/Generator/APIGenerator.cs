@@ -2,50 +2,50 @@
 
 namespace Donut.Generation.Core.Generator;
 
-public class CQRSGenerator
+public class APIGenerator
 {
-    public static string GenerateAddCommand(Type inputType, string commandType)
+    public static string GenerateCreate(Type inputType, string commandType)
     {
         StringBuilder classBuilder = new StringBuilder();
         string recordName = inputType.Name + "Command";
-        string handlerName = commandType + inputType.Name + "CommandHandler";
-        string namespaceName = "Donut.CQRS";
+        string handlerName = "Create" + inputType.Name + "EndPoint";
+        string namespaceName = "Donut.EndPoint";
 
         classBuilder.AppendLine($"""
-            using Donut.Core.CQRS;
-            using Donut.Repositories;
-            using Donut.Core.Tabels;
-            using Donut.Core.Results;
+            using Carter;
+            using MediatR;
+            using Donut.EndPoints.Requests;
+            using Microsoft.AspNetCore.Http;
+            using Microsoft.AspNetCore.Builder;
+            using Microsoft.AspNetCore.Routing;
             """);
         classBuilder.AppendLine($"");
         classBuilder.AppendLine($"namespace {namespaceName};");
-        classBuilder.AppendLine($"public record {commandType}{recordName}: ICommand<{inputType.Name}>");
-        classBuilder.AppendLine($"{{");
+        //classBuilder.AppendLine($"public record {commandType}{recordName}: ICommand<{inputType.Name}>");
+        //classBuilder.AppendLine($"{{");
 
-        classBuilder.AppendLine($"   public required {inputType.Name} {inputType.Name} {{ get; set; }}");
-        classBuilder.AppendLine("}");
-        classBuilder.AppendLine($"public class {handlerName}: ICommandHandler<{commandType}{recordName},{inputType.Name}>");
+        //classBuilder.AppendLine($"   public required {inputType.Name} {inputType.Name} {{ get; set; }}");
+        //classBuilder.AppendLine("}");
+        classBuilder.AppendLine($"public class {handlerName}: ICarterModule");
         classBuilder.AppendLine("{");
-        classBuilder.AppendLine($"    private readonly I{inputType.Name}Repository _repository;");
-        classBuilder.AppendLine($"    public {handlerName}(I{inputType.Name}Repository repository)");
-        classBuilder.AppendLine("""
-                {
-                    _repository=repository;
-                }
-            """);
-        classBuilder.AppendLine($"    public async Task<Result<{inputType.Name}>> Handle({commandType}{inputType.Name}Command request, CancellationToken cancellationToken)");
+        classBuilder.AppendLine($"    public void AddRoutes(IEndpointRouteBuilder app)");
         classBuilder.AppendLine($"    {{");
-        classBuilder.AppendLine($"        try");
-        classBuilder.AppendLine($"        {{");
-        classBuilder.AppendLine($"            var entity = await _repository.{commandType}(request.{inputType.Name});");
-        classBuilder.AppendLine($"            return Result.Success(entity);");
-        classBuilder.AppendLine($"        }}");
-        classBuilder.AppendLine($"        catch(Exception ex)");
-        classBuilder.AppendLine($"        {{");
-        classBuilder.AppendLine($"            return Result.Failure<{inputType.Name}>(new Error(\"{commandType}{inputType.Name}\", ex.Message));");
-        classBuilder.AppendLine($"        }}");
-        classBuilder.AppendLine($"    }}");
+        classBuilder.AppendLine($"        app.MapPost(\"/api/{inputType.Name.ToLower()}\", async (Create{inputType.Name}Request request, ISender sender) =>");
 
+        classBuilder.AppendLine($"        {{");
+        classBuilder.AppendLine($"            var result = await sender.Send(command);");
+        classBuilder.AppendLine($"            ");
+        classBuilder.AppendLine("""
+                        if (result.IsFailure)
+                        {
+                            return Results.BadRequest(result.Error);
+                        }
+            """);
+        classBuilder.AppendLine($"            return Results.Ok(result.Value);");
+        
+
+        classBuilder.AppendLine("        });");
+        classBuilder.AppendLine("    }");
         classBuilder.AppendLine("}");
 
         return classBuilder.ToString();
